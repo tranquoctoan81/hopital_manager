@@ -1,0 +1,185 @@
+<div class="header_container active mx-auto">
+    <a href="/" class="redirect" style="
+                    font-size: 2.5rem;
+                    color: #fff;
+                    display: inline-block;
+                    position: absolute;
+                    margin-left: 3ewm;
+                    padding-left: 1rem;
+                    margin-left: 1rem; 
+                "><i class="bi bi-backspace-fill"></i></a>
+    <nav class="header_time_work">
+        <div class="time_work">
+            Thời gian làm việc: <span>8h00 - 17h</span> từ <span>Thứ 2</span> đến <span>Thứ Bảy</span>
+        </div>
+        <div class="hotline_search">
+            <div class="hotline">
+                <div class="left"><i class="fa-solid fa-caret-right"></i> Hotline: <span>0374 463 3135</span></div>
+                <div class="right"><i class="fa-solid fa-caret-right"></i> Hotline: <span>0534 463 3254</span></div>
+                <div class="hidden1"></div>
+                <div class="hidden2"></div>
+            </div>
+        </div>
+        <div style="position: relative;display: flex; justify-content: space-between;align-items: center;cursor: pointer;"
+            class="search" id="cookie-value">
+            {{!-- <div class="img_avartar"><img
+                    src="https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_640.jpg" alt=""></div>
+            <SPAN style="display: inline-block;padding: 0 1rem;font-size:1.2rem;font-weight: 500;">HỨA VĂN CƯỜNG</SPAN>
+            <p style="font-size:2rem;margin: 0;"><i class="fa fa-caret-down" aria-hidden="true"></i></p>
+            <div
+                style="position: absolute;top:100%;width: 120%;right:0;background-color: #fff;z-index: 11111111111 !important;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                <a style="color: #000;display: block;padding: 1rem;font-size: 1.3rem;font-weight: 500;">Profile </a>
+                <a style="color: #000;display: block;padding: 1rem;font-size: 1.3rem;font-weight: 500;">Help</a>
+                <a style="color: #000;display: block;padding: 1rem;font-size: 1.3rem;font-weight: 500;">Log Out</a>
+            </div> --}}
+        </div>
+    </nav>
+    <nav id="login_hidden" class="navbar navbar-expand-lg   d-flex justify-content-between navbar_primary" style="">
+
+        <div class="logo_image  logo_image3 d-flex justify-content-center align-content-center">
+            <img src="images/—Pngtree—hospital.png" alt="">
+        </div>
+        <div class="logo_image logo_image2 d-flex justify-content-center align-content-center">
+            <img src="images/hospital-logo.png" alt="">
+        </div>
+
+        <ul class="menu_header" class="navbar-nav d-flex justify-content-between">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#dichvu">Dịch vụ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link cas_none cas_none_block">Tiếp nhận bệnh nhân</a>
+                <ul class="sub_menu" class="navbar-nav d-flex justify-content-between">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add_patient_information">Tiếp nhận bệnh nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/general_examination">Kiểm tra thể trạng và đo số liệu y tế cơ bản</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/list_patient">Danh sách hồ sơ bệnh nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chat">Tư vấn và giải đáp thắt mắc</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item cas_none">
+                <a class="nav-link" href="/examination">Khám bệnh</a>
+            </li>
+            <li class="nav-item cas_none">
+                <a class="nav-link" href="/subclinical">Chỉ định cận lâm sàng</a>
+            </li>
+            <li class="nav-item cas_none cas_none_block">
+                <a class="nav-link" href="/calendar">Xem ca trực</a>
+            </li>
+            <li class="nav-item cas_none cas_none_block">
+                <a class="nav-link ">Đóng tiền</a>
+                <ul class="sub_menu" class="navbar-nav d-flex justify-content-between">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/list_patient_bookhealth">Đóng tiền tạo sổ khám bệnh</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/list_patient_subclinical">Đóng tiền dịch vụ</a>
+                    </li>
+                </ul>
+            </li>
+            {{!-- <li class="nav-item">
+                <a class="nav-link" href="/change_password">Đổi mât khẩu</a>
+            </li> --}}
+        </ul>
+    </nav>
+
+
+</div>
+<style>
+    .hidden_avatar:hover .show_hidden {
+        display: block !important;
+    }
+
+    .img_avartar {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .img_avartar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<script>
+    const search = document.querySelector('.search')
+    const cas_none = document.querySelectorAll('.cas_none')
+    const cas_none_block = document.querySelectorAll('.cas_none_block')
+    cas_none.forEach(item => {
+        item.style.display = 'none '
+    })
+
+
+    if (document.cookie) {
+        const cookieValue = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("doc_name="))
+            ?.split("=")[1];
+
+        const doc_img = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("doc_img="))
+            ?.split("=")[1];
+
+        const cookieValuePosition = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("pos="))
+            ?.split("=")[1];
+        const token = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("token="))
+            ?.split("=")[1];
+        if (!token) {
+            search.innerHTML = `
+        <a href="/login" style="text-decoration:none;color:#fff">
+                <i style="font-size:2rem;" class="fa-solid fa-user"></i>
+            </a>
+        `
+        } else {
+            (function showCookieValue() {
+                search.innerHTML = `
+                    <div class="hidden_avatar" style="position: relative;display: flex; justify-content: space-between;align-items: center;cursor: pointer;">
+                        <div class="img_avartar"><img
+                        src="/${doc_img}" alt=""></div>
+                             <SPAN style="display: inline-block;padding: 0 1rem;font-size:1.2rem;font-weight: 500;">${cookieValue}</SPAN>
+                             <p style="font-size:2rem;margin: 0;"><i class="fa fa-caret-down" aria-hidden="true"></i></p>
+                             <div class="show_hidden"
+                            style="display:none;position: absolute;top:100%;width: 120%;right:0;background-color: #fff;z-index: 11111111111 !important;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                            <a style="color: #000;display: block;padding: 1rem;font-size: 1.3rem;font-weight: 500;">Thông tin cá nhân </a>
+                            <a href="/change_password" style="color: #000;display: block;padding: 1rem;font-size: 1.3rem;font-weight: 500;">Đổi mật khẩu</a>
+                            <a href="/logout" style="color: #000;display: block;padding: 1rem;font-size: 1.3rem;font-weight: 500;">Đăng xuất</a>
+                             </div>
+                        </div>
+                    `
+            })()
+        }
+        if (cookieValuePosition === 'Dr') {
+            cas_none.forEach(item => {
+                item.style.display = 'block'
+            })
+        } else if (cookieValuePosition === 'Cas') {
+            cas_none_block.forEach(item => {
+                item.style.display = 'block'
+            })
+        }
+    } else {
+        search.innerHTML = `
+        <a href="/login" style="text-decoration:none;color:#fff">
+                <i style="font-size:2rem;" class="fa-solid fa-user"></i>
+            </a>
+        `
+    }
+
+</script>

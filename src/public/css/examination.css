@@ -1,0 +1,378 @@
+.examination_container {
+  padding: 0 12rem;
+  color: #3f527e; }
+  .examination_container .examination_header h1 {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-top: 1rem; }
+  .examination_container .examination_header div .place {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0; }
+    .examination_container .examination_header div .place span {
+      font-style: italic;
+      font-weight: 500; }
+  .examination_container .info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column; }
+    .examination_container .info .info_wrapper {
+      display: flex;
+      justify-content: space-between; }
+      .examination_container .info .info_wrapper .info_left {
+        background-color: #e8f0f8;
+        width: 49%;
+        padding: 1rem; }
+        .examination_container .info .info_wrapper .info_left .detail {
+          font-size: 1.5rem;
+          font-weight: 600;
+          display: grid;
+          grid-template-columns: 1fr 1fr; }
+          .examination_container .info .info_wrapper .info_left .detail .item {
+            padding: 0 0 .5rem 0; }
+            .examination_container .info .info_wrapper .info_left .detail .item span {
+              color: #000; }
+      .examination_container .info .info_wrapper .info_right {
+        padding: 1rem;
+        width: 49%;
+        background-color: #e8f0f8; }
+        .examination_container .info .info_wrapper .info_right .subclinical {
+          position: relative; }
+          .examination_container .info .info_wrapper .info_right .subclinical form .submit {
+            margin: 0 1rem 0 0;
+            font-size: 1.3rem;
+            font-weight: 500; }
+          .examination_container .info .info_wrapper .info_right .subclinical form .inValue {
+            height: 3rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #335fc4;
+            outline: none; }
+          .examination_container .info .info_wrapper .info_right .subclinical .show_search {
+            width: 89%;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #62abf5; }
+            .examination_container .info .info_wrapper .info_right .subclinical .show_search li {
+              padding: .5rem; }
+              .examination_container .info .info_wrapper .info_right .subclinical .show_search li a {
+                color: #fff;
+                font-size: 1.1rem;
+                display: block;
+                text-align: center;
+                font-weight: 500;
+                text-decoration: none; }
+            .examination_container .info .info_wrapper .info_right .subclinical .show_search li:hover {
+              background-color: #7bbcfc; }
+        .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical {
+          height: 7rem; }
+          .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table thead tr {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #335fc4; }
+            .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table thead tr th {
+              text-align: center; }
+          .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table .swapper_subclinical tr {
+            font-size: 1.1rem; }
+            .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table .swapper_subclinical tr td,
+            .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table .swapper_subclinical tr th {
+              font-size: 1.1rem;
+              text-align: center; }
+  .examination_container .info_right {
+    background-color: #e8f0f8; }
+    .examination_container .info_right .subclinical {
+      position: relative; }
+      .examination_container .info_right .subclinical form .submit {
+        margin: 0 1rem 0 0;
+        font-size: 1.3rem;
+        font-weight: 500; }
+      .examination_container .info_right .subclinical form .inValue {
+        height: 3rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none; }
+      .examination_container .info_right .subclinical .show_search {
+        width: 89%;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #62abf5; }
+        .examination_container .info_right .subclinical .show_search li {
+          padding: .5rem; }
+          .examination_container .info_right .subclinical .show_search li a {
+            color: #fff;
+            font-size: 1.1rem;
+            display: block;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none; }
+        .examination_container .info_right .subclinical .show_search li:hover {
+          background-color: #7bbcfc; }
+    .examination_container .info_right .swapper_arr_subclinical {
+      height: 7rem; }
+      .examination_container .info_right .swapper_arr_subclinical table thead tr {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #335fc4; }
+        .examination_container .info_right .swapper_arr_subclinical table thead tr th {
+          text-align: center; }
+      .examination_container .info_right .swapper_arr_subclinical table .swapper_subclinical tr {
+        font-size: 1.1rem; }
+        .examination_container .info_right .swapper_arr_subclinical table .swapper_subclinical tr td,
+        .examination_container .info_right .swapper_arr_subclinical table .swapper_subclinical tr th {
+          font-size: 1.1rem;
+          text-align: center; }
+
+.arr_medicine_pre {
+  width: 50%;
+  position: absolute;
+  top: 30%;
+  left: 0;
+  transform: translate(50%);
+  min-height: 10%;
+  padding: 4rem 3rem;
+  background-color: #fff;
+  z-index: 101;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
+  .arr_medicine_pre .icon_closes {
+    color: #000;
+    top: 1rem;
+    right: 2rem; }
+  .arr_medicine_pre .swapper_arr_medical {
+    padding: 1rem .5rem; }
+    .arr_medicine_pre .swapper_arr_medical table thead tr {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #000; }
+      .arr_medicine_pre .swapper_arr_medical table thead tr th {
+        text-align: center; }
+    .arr_medicine_pre .swapper_arr_medical table tbody tr {
+      font-size: 1.3rem; }
+      .arr_medicine_pre .swapper_arr_medical table tbody tr td,
+      .arr_medicine_pre .swapper_arr_medical table tbody tr th {
+        font-size: 1.3rem;
+        text-align: center; }
+  .arr_medicine_pre .option {
+    position: absolute;
+    top: -15px;
+    right: 19px; }
+    .arr_medicine_pre .option a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #000;
+      text-decoration: underline; }
+
+.detail_examination {
+  margin-top: 3rem; }
+  .detail_examination h2 {
+    color: #d86538;
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: 600; }
+  .detail_examination .swapper {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between; }
+    .detail_examination .swapper .examination_left {
+      background-color: #e8f0f8;
+      width: 49.5%;
+      display: flex;
+      padding: 1rem 2rem; }
+      .detail_examination .swapper .examination_left .detail {
+        width: 75%;
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: grid;
+        grid-template-columns: 1fr 1fr; }
+        .detail_examination .swapper .examination_left .detail div {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 1rem;
+          margin-bottom: 1rem; }
+          .detail_examination .swapper .examination_left .detail div h4 {
+            width: 40%;
+            margin: 0;
+            text-align: right;
+            color: #335fc4;
+            font-weight: 600; }
+          .detail_examination .swapper .examination_left .detail div input {
+            width: 30%;
+            height: 2rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #335fc4;
+            outline: none;
+            padding-left: 1rem;
+            margin: 0 .5rem; }
+          .detail_examination .swapper .examination_left .detail div span {
+            width: 25%;
+            color: #000;
+            font-size: 1.3rem; }
+      .detail_examination .swapper .examination_left .symptom {
+        width: 20%; }
+        .detail_examination .swapper .examination_left .symptom h4 {
+          margin: 0;
+          color: #335fc4;
+          font-weight: 600; }
+        .detail_examination .swapper .examination_left .symptom textarea {
+          width: 120%;
+          height: 8rem;
+          font-size: 1.4rem;
+          font-weight: 500;
+          border: 1px solid #335fc4;
+          outline: none;
+          padding-left: 1rem;
+          margin: 0 .5rem; }
+    .detail_examination .swapper .examination_right {
+      background-color: #e8f0f8;
+      width: 49.5%;
+      padding: 1rem 2rem; }
+      .detail_examination .swapper .examination_right .swapper {
+        display: flex; }
+        .detail_examination .swapper .examination_right .swapper div {
+          width: 49.5%; }
+          .detail_examination .swapper .examination_right .swapper div #datepicker {
+            height: 3rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #335fc4;
+            outline: none;
+            padding-left: 1rem;
+            margin: 0 .5rem; }
+          .detail_examination .swapper .examination_right .swapper div #gender2 {
+            height: 3rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #335fc4;
+            outline: none;
+            padding-left: 1rem;
+            margin: 0 .5rem; }
+      .detail_examination .swapper .examination_right .submit_form {
+        width: 100%;
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none; }
+
+.list_medical h2 {
+  color: #e03027;
+  text-align: center;
+  font-size: 2.3rem;
+  font-weight: 600; }
+
+.list_medical .swapper_medical {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+  .list_medical .swapper_medical .detail_medical {
+    width: 30%;
+    padding: 1rem .5rem; }
+    .list_medical .swapper_medical .detail_medical div {
+      width: 100%;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      margin-bottom: 1rem; }
+      .list_medical .swapper_medical .detail_medical div h4 {
+        width: 40%;
+        margin: 0;
+        text-align: right;
+        color: #335fc4;
+        font-weight: 600; }
+      .list_medical .swapper_medical .detail_medical div input {
+        width: 50%;
+        height: 2.5rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+        padding-left: 1rem;
+        margin: 0 .5rem 0 1.5rem; }
+    .list_medical .swapper_medical .detail_medical .wrapper_search_medical {
+      position: relative; }
+      .list_medical .swapper_medical .detail_medical .wrapper_search_medical .search_medical {
+        width: 56%;
+        left: 44%;
+        position: absolute;
+        top: 100%;
+        background-color: #62abf5; }
+        .list_medical .swapper_medical .detail_medical .wrapper_search_medical .search_medical li {
+          cursor: pointer;
+          padding: .5rem; }
+          .list_medical .swapper_medical .detail_medical .wrapper_search_medical .search_medical li a {
+            color: #fff;
+            font-size: 1.1rem;
+            display: block;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none; }
+        .list_medical .swapper_medical .detail_medical .wrapper_search_medical .search_medical li:hover {
+          background-color: #7bbcfc; }
+    .list_medical .swapper_medical .detail_medical .submit {
+      margin: 0 1rem 0 0;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-left: 66%; }
+  .list_medical .swapper_medical .arr_medical {
+    width: 68%;
+    position: relative; }
+    .list_medical .swapper_medical .arr_medical .swapper_arr_medical {
+      padding: 1rem .5rem; }
+      .list_medical .swapper_medical .arr_medical .swapper_arr_medical table thead tr {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #335fc4; }
+        .list_medical .swapper_medical .arr_medical .swapper_arr_medical table thead tr th {
+          text-align: center; }
+      .list_medical .swapper_medical .arr_medical .swapper_arr_medical table tbody tr {
+        font-size: 1.3rem; }
+        .list_medical .swapper_medical .arr_medical .swapper_arr_medical table tbody tr td,
+        .list_medical .swapper_medical .arr_medical .swapper_arr_medical table tbody tr th {
+          font-size: 1.3rem;
+          text-align: center; }
+    .list_medical .swapper_medical .arr_medical .option {
+      position: absolute;
+      top: -15px;
+      right: 19px; }
+      .list_medical .swapper_medical .arr_medical .option a {
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #335fc4;
+        text-decoration: underline; }
+
+.list_pre .arr_medical {
+  width: 100%;
+  position: relative; }
+  .list_pre .arr_medical .swapper_arr_medical {
+    padding: 1rem .5rem; }
+    .list_pre .arr_medical .swapper_arr_medical table thead tr {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #335fc4; }
+      .list_pre .arr_medical .swapper_arr_medical table thead tr th {
+        text-align: center; }
+    .list_pre .arr_medical .swapper_arr_medical table tbody tr {
+      font-size: 1.3rem; }
+      .list_pre .arr_medical .swapper_arr_medical table tbody tr td,
+      .list_pre .arr_medical .swapper_arr_medical table tbody tr th {
+        font-size: 1.3rem;
+        text-align: center; }
+  .list_pre .arr_medical .option {
+    position: absolute;
+    top: -15px;
+    right: 19px; }
+    .list_pre .arr_medical .option a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #335fc4;
+      text-decoration: underline; }

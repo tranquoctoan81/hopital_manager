@@ -1,0 +1,86 @@
+.subclinical_container {
+  padding: 0 12rem;
+  color: #335fc4; }
+  .subclinical_container .subclinical_header h1 {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-top: 1rem; }
+  .subclinical_container .subclinical_header div .place {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0; }
+    .subclinical_container .subclinical_header div .place span {
+      font-style: italic;
+      font-weight: 500; }
+  .subclinical_container .subclinical_header .sub_container .sub_body {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 12rem;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 3rem; }
+    .subclinical_container .subclinical_header .sub_container .sub_body .sub_left {
+      width: 60%;
+      border-right: 1px solid #ccc;
+      margin-right: 2rem;
+      padding: 3rem;
+      background-color: #e7f0f7;
+      border-bottom-left-radius: 15px;
+      border-top-left-radius: 15px; }
+      .subclinical_container .subclinical_header .sub_container .sub_body .sub_left h3 {
+        text-align: center;
+        color: red;
+        font-weight: 600;
+        font-size: 2rem; }
+      .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.3rem;
+        margin-top: 2rem; }
+        .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info .sub_detail {
+          display: flex; }
+          .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info .sub_detail .col_1 {
+            width: 30%; }
+            .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info .sub_detail .col_1 .col-form-label {
+              color: #335fc4;
+              font-weight: 500; }
+        .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info:first-child {
+          width: 70%; }
+        .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info:nth-child(2) {
+          width: 30%; }
+          .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info:nth-child(2) .sub_detail .col_1 {
+            width: 50%; }
+    .subclinical_container .subclinical_header .sub_container .sub_body .sub_right {
+      width: 40%;
+      padding: 3rem; }
+      .subclinical_container .subclinical_header .sub_container .sub_body .sub_right h3 {
+        text-align: center;
+        color: red;
+        font-weight: 600;
+        font-size: 2rem; }
+      .subclinical_container .subclinical_header .sub_container .sub_body .sub_right .sub_right_content {
+        font-size: 1.3rem;
+        margin-top: 2rem; }
+  .subclinical_container .subclinical_header .sub_container .sub_footer,
+  .subclinical_container .subclinical_header .sub_container .sub_footer_2 {
+    margin: 5rem 12rem; }
+    .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail,
+    .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail {
+      display: flex;
+      flex-direction: row-reverse; }
+      .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail table,
+      .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail table {
+        width: 50%;
+        font-size: 1.3rem;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
+        .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail table thead,
+        .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail table thead {
+          background-color: #6986cf;
+          color: #ffff; }
+        .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail table tbody tr th input,
+        .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail table tbody tr td input,
+        .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail table tbody tr th input,
+        .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail table tbody tr td input {
+          font-size: 1.3rem; }

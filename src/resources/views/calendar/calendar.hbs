@@ -1,0 +1,434 @@
+{{!-- <div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="pd-20 card-box mb-30">
+                <div class="calendar-wrap">
+                    <div id="calendar"></div>
+                </div>
+                <!-- calendar modal -->
+                <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h4 class="h4">
+                                    <span class="event-icon weight-400 mr-3"></span><span class="event-title"></span>
+                                </h4>
+                                <div class="event-body"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form id="add-event">
+                                <div class="modal-body">
+                                    <h4 class="text-blue h4 mb-10">Add Event Detail</h4>
+                                    <div class="form-group">
+                                        <label>Event name</label>
+                                        <input type="text" class="form-control" name="ename" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Date</label>
+                                        <input type="text" class="datetimepicker form-control" name="edate" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Description</label>
+                                        <textarea class="form-control" name="edesc"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Color</label>
+                                        <select class="form-control" name="ecolor">
+                                            <option value="fc-bg-default">fc-bg-default</option>
+                                            <option value="fc-bg-blue">fc-bg-blue</option>
+                                            <option value="fc-bg-lightgreen">
+                                                fc-bg-lightgreen
+                                            </option>
+                                            <option value="fc-bg-pinkred">fc-bg-pinkred</option>
+                                            <option value="fc-bg-deepskyblue">
+                                                fc-bg-deepskyblue
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Icon</label>
+                                        <select class="form-control" name="eicon">
+                                            <option value="circle">circle</option>
+                                            <option value="cog">cog</option>
+                                            <option value="group">group</option>
+                                            <option value="suitcase">suitcase</option>
+                                            <option value="calendar">calendar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
+{{#each events}}
+<input class="items" type="hidden" title="{{this.title}}" start="{{this.start}}" end={{this.end}}>
+{{/each}}
+<div id="eventDetailsModal" style="font-size: 1rem;" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chi tiết ca trực</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tên bác sĩ trực: <span id="eventName"></span></p>
+                <p>Mô tả: <span id="eventDescription"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="contextMenu" style="display: none;z-index:10000">
+    <ul>
+        <li id="deleteEvent">Xóa sự kiện</li>
+    </ul>
+</div>
+<div style="font-size: 1.7rem;margin:3rem 6rem 0 0" id='calendar1'></div>
+<!-- Cloudflare Pages Analytics -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales/vi.js"></script>
+
+<script>
+    const items = document.querySelectorAll('.items')
+    let arr = []
+    items.forEach(item => {
+        let obj = {}
+        const des = {}
+        const id = item.getAttribute('id')
+        const title = item.getAttribute('title')
+        const description = item.getAttribute('description')
+        const start = item.getAttribute('start')
+        const end = item.getAttribute('end')
+        des['description'] = description
+        des['id'] = id
+        obj['title'] = title;
+        obj['extendedProps'] = des;
+        obj['start'] = start;
+        obj['end'] = end;
+        arr.push(obj)
+    })
+    var contextMenu = document.getElementById('contextMenu');
+    var deleteEvent = document.getElementById('deleteEvent');
+    var calendarEl = document.getElementById('calendar1');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        locale: 'vi',
+        editable: true,
+        selectable: true,
+        selectMirror: true,
+        themeSystem: 'bootstrap',
+        events: arr,
+        scrollTime: '00:00',
+        select: function (info) {
+            moment.locale('vi', {
+                months: "Tháng 1_Tháng 2_Tháng 3_Tháng 4_Tháng 5_Tháng 6_Tháng 7_Tháng 8_Tháng 9_Tháng 10_Tháng 11_Tháng 12".split("_"),
+                monthsShort: "Th.1_Th.2_Th.3_Th.4_Th.5_Th.6_Th.7_Th.8_Th.9_Th.10_Th.11_Th.12".split("_"),
+                weekdays: "Chủ Nhật_Thứ Hai_Thứ Ba_Thứ Tư_Thứ Năm_Thứ Sáu_Thứ Bảy".split("_"),
+                weekdaysShort: "CN_T2_T3_T4_T5_T6_T7".split("_"),
+                weekdaysMin: "CN_T2_T3_T4_T5_T6_T7".split("_"),
+                longDateFormat: {
+                    LT: "HH:mm",
+                    LTS: "HH:mm:ss",
+                    L: "DD/MM/YYYY",
+                    LL: "D MMMM [năm] YYYY",
+                    LLL: "D MMMM [năm] YYYY LT",
+                    LLLL: "dddd, D MMMM [năm] YYYY LT"
+                },
+                calendar: {
+                    sameDay: '[Hôm nay lúc] LT',
+                    nextDay: '[Ngày mai lúc] LT',
+                    nextWeek: 'dddd [tuần tới lúc] LT',
+                    lastDay: '[Hôm qua lúc] LT',
+                    lastWeek: 'dddd [tuần trước lúc] LT',
+                    sameElse: 'L'
+                },
+                relativeTime: {
+                    future: "%s tới",
+                    past: "%s trước",
+                    s: "vài giây",
+                    m: "một phút",
+                    mm: "%d phút",
+                    h: "một giờ",
+                    hh: "%d giờ",
+                    d: "một ngày",
+                    dd: "%d ngày",
+                    M: "một tháng",
+                    MM: "%d tháng",
+                    y: "một năm",
+                    yy: "%d năm"
+                },
+                ordinalParse: /\d{1,2}/,
+                ordinal: function (number) {
+                    return number;
+                }
+            });
+
+            var start = info.start;
+            var end = info.end;
+            var formattedStart = moment(start).format('DD-MM-YYYY HH:mm');
+            var formattedDay = moment(start).format('YYYY-MM-DD');
+            var formattedStarts = moment(start).format('HH:mm');
+            var formattedEnd = moment(end).format('h:mm');
+            var mywhen = formattedStart + ' - ' + formattedEnd;
+
+            $('#createEventModal #apptStartTime').val(formattedStart);
+            $('#createEventModal #apptStarDay').val(formattedDay);
+            $('#createEventModal #apptStartTimes').val(formattedStarts);
+            $('#createEventModal #apptEndTime').val(formattedEnd);
+            $('#createEventModal #when').text(mywhen);
+            $('#createEventModal').modal('show');
+        },
+        eventClick: function (info) {
+            $('#eventDetailsModal #eventName').text(info.event.title);
+            $('#eventDetailsModal #eventDescription').text(info.event.extendedProps.description);
+            $('#eventDetailsModal').modal('show');
+        },
+        eventDidMount: function (info) {
+            var event = info.event;
+            info.el.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+                contextMenu.style.left = e.pageX + 'px';
+                contextMenu.style.top = e.pageY + 'px';
+                contextMenu.style.display = 'block';
+                deleteEvent.dataset.eventId = event.extendedProps.id;
+            });
+        },
+        eventContent: function (arg) {
+            var eventColor = arg.event.extendedProps.backgroundColor;
+            var html = '<b style="background-color: ' + eventColor + ';">' + arg.timeText + '</b>';
+            return { html: html };
+        }
+    });
+    calendar.render();
+
+</script>
+<style>
+    #app_content {
+        width: 80% !important;
+    }
+
+    .custom-select {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .select-box {
+        font-size: 1.2rem;
+    }
+
+    .options {
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 10rem;
+        position: absolute;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+        overflow-y: auto;
+        background-color: #fff;
+    }
+
+    .options li {
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .options li.selected {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu>a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover>a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left>.dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+
+    div.dataTables_wrapper div.dataTables_length label {
+        text-align: left;
+        white-space: nowrap;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 0.85em;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate .paginate_button {
+        cursor: pointer;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>thead>tr>th {}
+
+    .color_random.active {
+        color: red;
+    }
+
+
+    .arrowHidden {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+    }
+
+    #app .header_container #login_hidden {}
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+
+
+    @media (min-width: 1025px) {
+        .h-custom {}
+    }
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #a1c4fd;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))
+    }
+
+    .bg-indigo {
+        background-color: #4835d4;
+    }
+
+    @media (min-width: 992px) {
+        .card-registration-2 .bg-indigo {
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .card-registration-2 .bg-indigo {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+    }
+</style>

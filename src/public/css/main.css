@@ -1,0 +1,898 @@
+@import url("https://fonts.googleapis.com/css2?family=Birthstone+Bounce&family=Monsieur+La+Doulaise&family=Open+Sans:wght@300;400;500;600;700;800&family=Pinyon+Script&family=Roboto:wght@300;400;500;700;900&family=UnifrakturMaguntia&display=swap");
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  outline: none; }
+
+html {
+  font-size: 65.5%;
+  scroll-behavior: smooth; }
+
+#app .header_container .header_time_work {
+  border: 0;
+  height: 4.3rem;
+  background-color: green;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden; }
+  #app .header_container .header_time_work .time_work {
+    font-size: 1.3rem;
+    font-weight: 400; }
+    #app .header_container .header_time_work .time_work span {
+      color: yellow; }
+  #app .header_container .header_time_work .hotline_search {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 35%;
+    justify-content: center;
+    background-color: #024102;
+    position: relative;
+    margin-left: 30rem; }
+    #app .header_container .header_time_work .hotline_search .hotline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: 500; }
+      #app .header_container .header_time_work .hotline_search .hotline i,
+      #app .header_container .header_time_work .hotline_search .hotline span {
+        color: yellow; }
+      #app .header_container .header_time_work .hotline_search .hotline .right {
+        margin-left: 2.5rem; }
+      #app .header_container .header_time_work .hotline_search .hotline .hidden1,
+      #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        transform: rotate(45deg);
+        position: absolute;
+        width: 4.5rem;
+        height: 100%;
+        left: -20px;
+        background-color: green; }
+      #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        left: auto;
+        right: -15px !important;
+        background-color: #024102; }
+  #app .header_container .header_time_work.active {
+    display: none !important; }
+  #app .header_container .header_time_work .search {
+    height: 4.3rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    #app .header_container .header_time_work .search h4 {
+      display: block;
+      margin: 0;
+      font-size: 1.4rem; }
+      #app .header_container .header_time_work .search h4 span {
+        text-transform: uppercase;
+        font-weight: 600; }
+
+#app .header_container nav {
+  padding: 0 12rem;
+  border: 2px solid #eee;
+  background-color: #fff;
+  transition: all 2ss ease-in-out; }
+  #app .header_container nav .logo_image {
+    width: 10rem;
+    height: 10rem;
+    overflow: hidden; }
+    #app .header_container nav .logo_image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
+  #app .header_container nav .logo_image2 {
+    display: none !important; }
+  #app .header_container nav .menu_header {
+    margin-bottom: 0; }
+    #app .header_container nav .menu_header .nav-item {
+      cursor: pointer;
+      display: inline-block; }
+      #app .header_container nav .menu_header .nav-item .nav-link {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: green; }
+  #app .header_container nav .button_hotline button {
+    font-size: 2rem;
+    font-weight: 600; }
+
+#app .header_container .navbar_primary.active {
+  height: 8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000; }
+  #app .header_container .navbar_primary.active .logo_image {
+    width: 10rem;
+    height: 10rem;
+    overflow: hidden; }
+    #app .header_container .navbar_primary.active .logo_image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
+  #app .header_container .navbar_primary.active .menu_header {
+    margin-bottom: 0; }
+    #app .header_container .navbar_primary.active .menu_header .nav-item {
+      cursor: pointer;
+      display: inline-block;
+      position: relative; }
+      #app .header_container .navbar_primary.active .menu_header .nav-item .sub_menu {
+        width: 180%; }
+        #app .header_container .navbar_primary.active .menu_header .nav-item .sub_menu .nav-item .nav-link {
+          font-size: 1.4rem;
+          font-weight: 500;
+          color: #389038; }
+        #app .header_container .navbar_primary.active .menu_header .nav-item .sub_menu .nav-item:hover .nav-link {
+          color: #032103; }
+      #app .header_container .navbar_primary.active .menu_header .nav-item .nav-link {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: green; }
+
+#app .body-login {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("https://st.quantrimang.com/photos/image/2021/02/03/Hinh-nen-xanh-la-cay-31.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+  #app .body-login .form-login {
+    width: 500px;
+    border-color: black;
+    border: solid 1px;
+    color: white;
+    padding: 15px;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 10px; }
+
+#app .content_container {
+  width: 100%;
+  overflow: hidden; }
+  #app .content_container .slides_container .slide_wrapper .img {
+    width: 100%;
+    height: 100%; }
+    #app .content_container .slides_container .slide_wrapper .img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
+  #app .content_container .dichvuytenoibat {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    margin-bottom: 2rem; }
+    #app .content_container .dichvuytenoibat .dichvu {
+      display: flex; }
+      #app .content_container .dichvuytenoibat .dichvu .widget_title {
+        color: #319e95;
+        font-weight: 600;
+        font-size: 3.2rem;
+        margin-left: .5rem; }
+    #app .content_container .dichvuytenoibat .textwidget {
+      margin-top: .5rem;
+      color: #000;
+      font-weight: 400;
+      font-size: 2.5rem; }
+  #app .content_container .dichvu_slide_wrapper {
+    width: 80%;
+    margin: 0 auto;
+    height: 60vh; }
+    #app .content_container .dichvu_slide_wrapper .dichvu_slides {
+      width: 100%; }
+      #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide {
+        width: 325px;
+        display: inline-block; }
+        #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .wrap_dvu {
+          position: relative;
+          height: 50%; }
+          #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .wrap_dvu .images {
+            width: 100%;
+            height: 100%; }
+            #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .wrap_dvu .images img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover; }
+          #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .wrap_dvu .textwidget {
+            position: absolute;
+            bottom: 0;
+            right: 0px;
+            z-index: 10000000;
+            padding: 13px; }
+            #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .wrap_dvu .textwidget h4 a {
+              color: #fff;
+              font-weight: 600;
+              font-size: 1.6rem;
+              font-weight: 600;
+              text-decoration: none;
+              font-style: italic; }
+            #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .wrap_dvu .textwidget p {
+              font-size: 1.5rem;
+              font-weight: 500; }
+            #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .wrap_dvu .textwidget .order_n {
+              font-size: 16px;
+              color: #fff;
+              padding: 10px 20px;
+              border: none;
+              background: #319E95;
+              border-radius: 5px; }
+        #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .textwidget {
+          padding: 13px; }
+          #app .content_container .dichvu_slide_wrapper .dichvu_slides .dichvu_slide .textwidget h4 a {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-decoration: none;
+            font-style: italic; }
+  #app .content_container .outstanding {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    height: 36rem;
+    margin-bottom: 3rem; }
+    #app .content_container .outstanding .outstanding_left {
+      width: 45%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column; }
+      #app .content_container .outstanding .outstanding_left .img {
+        width: 100%;
+        height: 70%; }
+        #app .content_container .outstanding .outstanding_left .img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; }
+      #app .content_container .outstanding .outstanding_left .img_detail {
+        background-color: #edf7f2;
+        margin-top: auto;
+        padding: 20px; }
+        #app .content_container .outstanding .outstanding_left .img_detail h4 {
+          margin: 0px 0px 5px 0px;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 25px; }
+    #app .content_container .outstanding .outstanding_right {
+      width: 62%;
+      height: 100%;
+      overflow: hidden;
+      padding: 20px 0 0 70px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+      #app .content_container .outstanding .outstanding_right .images_dauphay {
+        position: absolute;
+        top: 0;
+        left: 0; }
+      #app .content_container .outstanding .outstanding_right p {
+        font-size: 18px;
+        font-style: italic;
+        line-height: 24px;
+        margin: 0px 0px 30px 0px; }
+      #app .content_container .outstanding .outstanding_right .parameter .parameter_top,
+      #app .content_container .outstanding .outstanding_right .parameter .parameter_bottom {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        #app .content_container .outstanding .outstanding_right .parameter .parameter_top .parameter_item,
+        #app .content_container .outstanding .outstanding_right .parameter .parameter_bottom .parameter_item {
+          width: 47%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center; }
+          #app .content_container .outstanding .outstanding_right .parameter .parameter_top .parameter_item .logo,
+          #app .content_container .outstanding .outstanding_right .parameter .parameter_bottom .parameter_item .logo {
+            width: 15%; }
+            #app .content_container .outstanding .outstanding_right .parameter .parameter_top .parameter_item .logo i,
+            #app .content_container .outstanding .outstanding_right .parameter .parameter_bottom .parameter_item .logo i {
+              font-size: 5rem;
+              color: #319E95; }
+          #app .content_container .outstanding .outstanding_right .parameter .parameter_top .parameter_item .content,
+          #app .content_container .outstanding .outstanding_right .parameter .parameter_bottom .parameter_item .content {
+            width: 85%;
+            padding-left: 6rem; }
+            #app .content_container .outstanding .outstanding_right .parameter .parameter_top .parameter_item .content .title,
+            #app .content_container .outstanding .outstanding_right .parameter .parameter_bottom .parameter_item .content .title {
+              display: block;
+              font-weight: 700;
+              font-size: 20px; }
+            #app .content_container .outstanding .outstanding_right .parameter .parameter_top .parameter_item .content .content_time,
+            #app .content_container .outstanding .outstanding_right .parameter .parameter_bottom .parameter_item .content .content_time {
+              margin: 0;
+              font-style: normal;
+              font-weight: 500; }
+      #app .content_container .outstanding .outstanding_right .parameter .parameter_bottom {
+        margin-top: 7rem; }
+
+#app .body-info {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+  #app .body-info .form-info {
+    width: 500px;
+    border-color: black;
+    border: solid 1px;
+    color: black;
+    padding: 15px;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 10px; }
+    #app .body-info .form-info .form-info input {
+      color: black; }
+  #app .body-info .form-control {
+    display: block;
+    width: 100%;
+    outline: none;
+    border-top: 1px solid transparent;
+    background-color: transparent;
+    border-right: transparent;
+    border-left: transparent;
+    border-bottom: 1px solid black; }
+
+#app .add_info_container {
+  padding: 0 12rem 12rem 10rem;
+  color: #335fc4; }
+  #app .add_info_container .add_info_header h1 {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-top: 1rem; }
+  #app .add_info_container .add_info_header div .place {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0; }
+    #app .add_info_container .add_info_header div .place span {
+      font-style: italic;
+      font-weight: 500; }
+  #app .add_info_container .add_info_detail .wrapper_search_pathological {
+    position: relative; }
+    #app .add_info_container .add_info_detail .wrapper_search_pathological .search_pathological {
+      width: 100%;
+      position: absolute;
+      top: 65%;
+      right: 0;
+      background-color: #62abf5;
+      z-index: 100; }
+      #app .add_info_container .add_info_detail .wrapper_search_pathological .search_pathological li {
+        display: block;
+        text-align: center;
+        padding: .3rem; }
+        #app .add_info_container .add_info_detail .wrapper_search_pathological .search_pathological li:hover {
+          background-color: #7bbcfc; }
+        #app .add_info_container .add_info_detail .wrapper_search_pathological .search_pathological li a {
+          color: #fff;
+          font-size: 1.1rem;
+          display: block;
+          text-align: center;
+          font-weight: 500;
+          text-decoration: none; }
+  #app .add_info_container .add_info_detail .form_search_premise {
+    position: relative; }
+    #app .add_info_container .add_info_detail .form_search_premise .search_hidden {
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #62abf5; }
+      #app .add_info_container .add_info_detail .form_search_premise .search_hidden li {
+        display: block;
+        text-align: center;
+        padding: .3rem; }
+        #app .add_info_container .add_info_detail .form_search_premise .search_hidden li:hover {
+          background-color: #7bbcfc; }
+        #app .add_info_container .add_info_detail .form_search_premise .search_hidden li a {
+          color: #fff;
+          font-size: 1.1rem;
+          display: block;
+          text-align: center;
+          font-weight: 500;
+          text-decoration: none; }
+  #app .add_info_container .list_patient h2 {
+    color: orangered;
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 2rem; }
+  #app .add_info_container .list_patient div .table thead tr th {
+    text-align: center;
+    color: #fff;
+    font-weight: 600; }
+  #app .add_info_container .list_patient div .table tbody tr td {
+    text-align: center;
+    font-size: 1.5rem; }
+  #app .add_info_container .list_patient div .table tbody tr .address {
+    text-align: left;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word; }
+
+#app .examination_container {
+  padding: 0 12rem;
+  color: #3f527e; }
+  #app .examination_container .examination_header h1 {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-top: 1rem; }
+  #app .examination_container .examination_header div .place {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0; }
+    #app .examination_container .examination_header div .place span {
+      font-style: italic;
+      font-weight: 500; }
+  #app .examination_container .info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column; }
+    #app .examination_container .info .info_wrapper {
+      display: flex;
+      justify-content: space-between; }
+      #app .examination_container .info .info_wrapper .info_left {
+        background-color: #e8f0f8;
+        width: 49%;
+        padding: 1rem; }
+        #app .examination_container .info .info_wrapper .info_left .detail {
+          font-size: 1.5rem;
+          font-weight: 600;
+          display: grid;
+          grid-template-columns: 1fr 1fr; }
+          #app .examination_container .info .info_wrapper .info_left .detail .item {
+            padding: 0 0 .5rem 0; }
+            #app .examination_container .info .info_wrapper .info_left .detail .item span {
+              color: #000; }
+      #app .examination_container .info .info_wrapper .info_right {
+        padding: 1rem;
+        width: 49%;
+        background-color: #e8f0f8; }
+        #app .examination_container .info .info_wrapper .info_right .subclinical {
+          position: relative; }
+          #app .examination_container .info .info_wrapper .info_right .subclinical form .submit {
+            margin: 0 1rem 0 0;
+            font-size: 1.3rem;
+            font-weight: 500; }
+          #app .examination_container .info .info_wrapper .info_right .subclinical form .inValue {
+            height: 3rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #335fc4;
+            outline: none; }
+          #app .examination_container .info .info_wrapper .info_right .subclinical .show_search {
+            width: 89%;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #62abf5; }
+            #app .examination_container .info .info_wrapper .info_right .subclinical .show_search li {
+              padding: .5rem; }
+              #app .examination_container .info .info_wrapper .info_right .subclinical .show_search li a {
+                color: #fff;
+                font-size: 1.1rem;
+                display: block;
+                text-align: center;
+                font-weight: 500;
+                text-decoration: none; }
+            #app .examination_container .info .info_wrapper .info_right .subclinical .show_search li:hover {
+              background-color: #7bbcfc; }
+        #app .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical {
+          height: 7rem; }
+          #app .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table thead tr {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #335fc4; }
+            #app .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table thead tr th {
+              text-align: center; }
+          #app .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table .swapper_subclinical tr {
+            font-size: 1.1rem; }
+            #app .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table .swapper_subclinical tr td,
+            #app .examination_container .info .info_wrapper .info_right .swapper_arr_subclinical table .swapper_subclinical tr th {
+              font-size: 1.1rem;
+              text-align: center; }
+  #app .examination_container .info_right {
+    background-color: #e8f0f8; }
+    #app .examination_container .info_right .subclinical {
+      position: relative; }
+      #app .examination_container .info_right .subclinical form .submit {
+        margin: 0 1rem 0 0;
+        font-size: 1.3rem;
+        font-weight: 500; }
+      #app .examination_container .info_right .subclinical form .inValue {
+        height: 3rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none; }
+      #app .examination_container .info_right .subclinical .show_search {
+        width: 89%;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #62abf5; }
+        #app .examination_container .info_right .subclinical .show_search li {
+          padding: .5rem; }
+          #app .examination_container .info_right .subclinical .show_search li a {
+            color: #fff;
+            font-size: 1.1rem;
+            display: block;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none; }
+        #app .examination_container .info_right .subclinical .show_search li:hover {
+          background-color: #7bbcfc; }
+    #app .examination_container .info_right .swapper_arr_subclinical {
+      height: 7rem; }
+      #app .examination_container .info_right .swapper_arr_subclinical table thead tr {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #335fc4; }
+        #app .examination_container .info_right .swapper_arr_subclinical table thead tr th {
+          text-align: center; }
+      #app .examination_container .info_right .swapper_arr_subclinical table .swapper_subclinical tr {
+        font-size: 1.1rem; }
+        #app .examination_container .info_right .swapper_arr_subclinical table .swapper_subclinical tr td,
+        #app .examination_container .info_right .swapper_arr_subclinical table .swapper_subclinical tr th {
+          font-size: 1.1rem;
+          text-align: center; }
+
+#app .arr_medicine_pre {
+  width: 50%;
+  position: absolute;
+  top: 30%;
+  left: 0;
+  transform: translate(50%);
+  min-height: 10%;
+  padding: 4rem 3rem;
+  background-color: #fff;
+  z-index: 101;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
+  #app .arr_medicine_pre .icon_closes {
+    color: #000;
+    top: 1rem;
+    right: 2rem; }
+  #app .arr_medicine_pre .swapper_arr_medical {
+    padding: 1rem .5rem; }
+    #app .arr_medicine_pre .swapper_arr_medical table thead tr {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #000; }
+      #app .arr_medicine_pre .swapper_arr_medical table thead tr th {
+        text-align: center; }
+    #app .arr_medicine_pre .swapper_arr_medical table tbody tr {
+      font-size: 1.3rem; }
+      #app .arr_medicine_pre .swapper_arr_medical table tbody tr td,
+      #app .arr_medicine_pre .swapper_arr_medical table tbody tr th {
+        font-size: 1.3rem;
+        text-align: center; }
+  #app .arr_medicine_pre .option {
+    position: absolute;
+    top: -15px;
+    right: 19px; }
+    #app .arr_medicine_pre .option a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #000;
+      text-decoration: underline; }
+
+#app .detail_examination {
+  margin-top: 3rem; }
+  #app .detail_examination h2 {
+    color: #d86538;
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: 600; }
+  #app .detail_examination .swapper {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between; }
+    #app .detail_examination .swapper .examination_left {
+      background-color: #e8f0f8;
+      width: 49.5%;
+      display: flex;
+      padding: 1rem 2rem; }
+      #app .detail_examination .swapper .examination_left .detail {
+        width: 75%;
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: grid;
+        grid-template-columns: 1fr 1fr; }
+        #app .detail_examination .swapper .examination_left .detail div {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 1rem;
+          margin-bottom: 1rem; }
+          #app .detail_examination .swapper .examination_left .detail div h4 {
+            width: 40%;
+            margin: 0;
+            text-align: right;
+            color: #335fc4;
+            font-weight: 600; }
+          #app .detail_examination .swapper .examination_left .detail div input {
+            width: 30%;
+            height: 2rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #335fc4;
+            outline: none;
+            padding-left: 1rem;
+            margin: 0 .5rem; }
+          #app .detail_examination .swapper .examination_left .detail div span {
+            width: 25%;
+            color: #000;
+            font-size: 1.3rem; }
+      #app .detail_examination .swapper .examination_left .symptom {
+        width: 20%; }
+        #app .detail_examination .swapper .examination_left .symptom h4 {
+          margin: 0;
+          color: #335fc4;
+          font-weight: 600; }
+        #app .detail_examination .swapper .examination_left .symptom textarea {
+          width: 120%;
+          height: 8rem;
+          font-size: 1.4rem;
+          font-weight: 500;
+          border: 1px solid #335fc4;
+          outline: none;
+          padding-left: 1rem;
+          margin: 0 .5rem; }
+    #app .detail_examination .swapper .examination_right {
+      background-color: #e8f0f8;
+      width: 49.5%;
+      padding: 1rem 2rem; }
+      #app .detail_examination .swapper .examination_right .swapper {
+        display: flex; }
+        #app .detail_examination .swapper .examination_right .swapper div {
+          width: 49.5%; }
+          #app .detail_examination .swapper .examination_right .swapper div #datepicker {
+            height: 3rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #335fc4;
+            outline: none;
+            padding-left: 1rem;
+            margin: 0 .5rem; }
+          #app .detail_examination .swapper .examination_right .swapper div #gender2 {
+            height: 3rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #335fc4;
+            outline: none;
+            padding-left: 1rem;
+            margin: 0 .5rem; }
+      #app .detail_examination .swapper .examination_right .submit_form {
+        width: 100%;
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none; }
+
+#app .list_medical h2 {
+  color: #e03027;
+  text-align: center;
+  font-size: 2.3rem;
+  font-weight: 600; }
+
+#app .list_medical .swapper_medical {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+  #app .list_medical .swapper_medical .detail_medical {
+    width: 30%;
+    padding: 1rem .5rem; }
+    #app .list_medical .swapper_medical .detail_medical div {
+      width: 100%;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      margin-bottom: 1rem; }
+      #app .list_medical .swapper_medical .detail_medical div h4 {
+        width: 40%;
+        margin: 0;
+        text-align: right;
+        color: #335fc4;
+        font-weight: 600; }
+      #app .list_medical .swapper_medical .detail_medical div input {
+        width: 50%;
+        height: 2.5rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+        padding-left: 1rem;
+        margin: 0 .5rem 0 1.5rem; }
+    #app .list_medical .swapper_medical .detail_medical .wrapper_search_medical {
+      position: relative; }
+      #app .list_medical .swapper_medical .detail_medical .wrapper_search_medical .search_medical {
+        width: 56%;
+        left: 44%;
+        position: absolute;
+        top: 100%;
+        background-color: #62abf5; }
+        #app .list_medical .swapper_medical .detail_medical .wrapper_search_medical .search_medical li {
+          cursor: pointer;
+          padding: .5rem; }
+          #app .list_medical .swapper_medical .detail_medical .wrapper_search_medical .search_medical li a {
+            color: #fff;
+            font-size: 1.1rem;
+            display: block;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none; }
+        #app .list_medical .swapper_medical .detail_medical .wrapper_search_medical .search_medical li:hover {
+          background-color: #7bbcfc; }
+    #app .list_medical .swapper_medical .detail_medical .submit {
+      margin: 0 1rem 0 0;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-left: 66%; }
+  #app .list_medical .swapper_medical .arr_medical {
+    width: 68%;
+    position: relative; }
+    #app .list_medical .swapper_medical .arr_medical .swapper_arr_medical {
+      padding: 1rem .5rem; }
+      #app .list_medical .swapper_medical .arr_medical .swapper_arr_medical table thead tr {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #335fc4; }
+        #app .list_medical .swapper_medical .arr_medical .swapper_arr_medical table thead tr th {
+          text-align: center; }
+      #app .list_medical .swapper_medical .arr_medical .swapper_arr_medical table tbody tr {
+        font-size: 1.3rem; }
+        #app .list_medical .swapper_medical .arr_medical .swapper_arr_medical table tbody tr td,
+        #app .list_medical .swapper_medical .arr_medical .swapper_arr_medical table tbody tr th {
+          font-size: 1.3rem;
+          text-align: center; }
+    #app .list_medical .swapper_medical .arr_medical .option {
+      position: absolute;
+      top: -15px;
+      right: 19px; }
+      #app .list_medical .swapper_medical .arr_medical .option a {
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #335fc4;
+        text-decoration: underline; }
+
+#app .list_pre .arr_medical {
+  width: 100%;
+  position: relative; }
+  #app .list_pre .arr_medical .swapper_arr_medical {
+    padding: 1rem .5rem; }
+    #app .list_pre .arr_medical .swapper_arr_medical table thead tr {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #335fc4; }
+      #app .list_pre .arr_medical .swapper_arr_medical table thead tr th {
+        text-align: center; }
+    #app .list_pre .arr_medical .swapper_arr_medical table tbody tr {
+      font-size: 1.3rem; }
+      #app .list_pre .arr_medical .swapper_arr_medical table tbody tr td,
+      #app .list_pre .arr_medical .swapper_arr_medical table tbody tr th {
+        font-size: 1.3rem;
+        text-align: center; }
+  #app .list_pre .arr_medical .option {
+    position: absolute;
+    top: -15px;
+    right: 19px; }
+    #app .list_pre .arr_medical .option a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #335fc4;
+      text-decoration: underline; }
+
+#app .subclinical_container {
+  padding: 0 12rem;
+  color: #335fc4; }
+  #app .subclinical_container .subclinical_header h1 {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-top: 1rem; }
+  #app .subclinical_container .subclinical_header div .place {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0; }
+    #app .subclinical_container .subclinical_header div .place span {
+      font-style: italic;
+      font-weight: 500; }
+  #app .subclinical_container .subclinical_header .sub_container .sub_body {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 12rem;
+    border-radius: 15px;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 3rem; }
+    #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left {
+      width: 60%;
+      border-right: 1px solid #ccc;
+      margin-right: 2rem;
+      padding: 3rem;
+      background-color: #e7f0f7;
+      border-bottom-left-radius: 15px;
+      border-top-left-radius: 15px; }
+      #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left h3 {
+        text-align: center;
+        color: red;
+        font-weight: 600;
+        font-size: 2rem; }
+      #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.3rem;
+        margin-top: 2rem; }
+        #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info .sub_detail {
+          display: flex; }
+          #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info .sub_detail .col_1 {
+            width: 30%; }
+            #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info .sub_detail .col_1 .col-form-label {
+              color: #335fc4;
+              font-weight: 500; }
+        #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info:first-child {
+          width: 70%; }
+        #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info:nth-child(2) {
+          width: 30%; }
+          #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_left .sub_left_content .sub_info:nth-child(2) .sub_detail .col_1 {
+            width: 50%; }
+    #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_right {
+      width: 40%;
+      padding: 3rem; }
+      #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_right h3 {
+        text-align: center;
+        color: red;
+        font-weight: 600;
+        font-size: 2rem; }
+      #app .subclinical_container .subclinical_header .sub_container .sub_body .sub_right .sub_right_content {
+        font-size: 1.3rem;
+        margin-top: 2rem; }
+  #app .subclinical_container .subclinical_header .sub_container .sub_footer,
+  #app .subclinical_container .subclinical_header .sub_container .sub_footer_2 {
+    margin: 5rem 12rem; }
+    #app .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail,
+    #app .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail {
+      display: flex;
+      flex-direction: row-reverse; }
+      #app .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail table,
+      #app .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail table {
+        width: 50%;
+        font-size: 1.3rem;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
+        #app .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail table thead,
+        #app .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail table thead {
+          background-color: #6986cf;
+          color: #ffff; }
+        #app .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail table tbody tr th input,
+        #app .subclinical_container .subclinical_header .sub_container .sub_footer .sub_footer_detail table tbody tr td input,
+        #app .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail table tbody tr th input,
+        #app .subclinical_container .subclinical_header .sub_container .sub_footer_2 .sub_footer_detail table tbody tr td input {
+          font-size: 1.3rem; }

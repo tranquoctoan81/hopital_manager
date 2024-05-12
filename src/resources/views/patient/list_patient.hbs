@@ -1,0 +1,594 @@
+<div class="add_info_container">
+    <div class="add_info_header" style="
+    padding-left: 4rem;
+    margin-bottom: 2rem;
+">
+        <h1>Danh sách hồ sơ bệnh nhân</h1>
+        <div>
+            <p class="place">Khu Vực: <span>Danh sách bệnh nhân</span></p>
+            <div class="place">Lễ tân: <span>{{doctorName}}</span></div>
+        </div>
+        <div class="list_patient">
+            <div id="listPatient" class="card-body">
+                <div class="table-responsive">
+                    <table id="datatable" class="table   data-table" style="width: 100%">
+                        <thead style="background-color:#335fc4" class="thead-inverse">
+                            <tr style="font-size:1.4rem;color:#fff;">
+                                <th>STT</th>
+                                <th>Mã BN</th>
+                                <th>Tên Bệnh Nhân</th>
+                                <th>Ngày Sinh</th>
+                                <th>Giới Tính</th>
+                                <th>Tên Cha/Mẹ</th>
+                                <th style="width: 20%;">Địa Chỉ</th>
+                                <th colspan=""></th>
+                                <th colspan=""></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each listPatients}}
+                            <tr>
+                                <td style="text-align:center;font-size: 1.5rem;" scope="row">{{sum @index 1}}</td>
+                                <td>BN0000{{this.pat_id}}</td>
+                                <td data-toggle="modal" data-target="#info{{this.pat_id}}"
+                                    style="text-align:left;cursor: pointer;">{{this.pat_name}}</td>
+                                <td>{{this.date}}</td>
+                                <td>
+                                    <script>
+                                        if ({{ this.pat_sex }} === 1) {
+                                            document.write('Nam')
+                                        }else {
+                                            document.write('Nữ')
+                                        }
+                                    </script>
+                                </td>
+                                <td style="text-align:left;">{{this.homie_name}}</td>
+                                <td class="address">{{this.pat_address}}</td>
+                                <td colspan="1">
+                                    <button type="button" data-toggle="modal" data-target="#examination{{this.pat_id}}"
+                                        class="btn btn-danger btn-sm">kết
+                                        quả khám bệnh</button>
+                                </td>
+                                <td colspan="1">
+                                    <button type="button" data-toggle="modal" data-target="#prescription{{this.pat_id}}"
+                                        class="btn btn-secondary btn-sm">Toa thuốc</button>
+
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{{#each listPatients}}
+<div class="modal fade " id="info{{this.pat_id}}" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form method="post" class="form_hidden_show_info">
+                <div class="table-responsive text-nowrap swapper_arr_patient">
+                    <table style="" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="padding:1rem 0;font-size:1.3rem;color:#fff" colspan="1">Chỉnh sửa thông tin
+                                    bệnh nhân
+                                </th>
+                                <th style="padding:1rem 0;font-size:1.3rem;color:#fff;text-align:center">
+                                    <button style="
+    float: right;
+" type="submit" class="btn btn-danger btn-sm waves-effect">--Sửa--</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody_add_patient">
+
+                        </tbody>
+                    </table>
+                    <a href="/" class="redirect" style="
+        top:2%;
+        left:-1%;
+                            font-size: 1.4rem;
+                            color: #fff;
+                            display: inline-block;
+                            position: absolute;
+                            margin-left: 3rem;
+                            padding-left: 1rem;
+                            margin-left: 1rem; 
+                        "><i class="bi bi-backspace-fill"></i></a>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/each}}
+
+{{#each listPatients}}
+<div class="modal fade " id="examination{{this.pat_id}}" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+
+            <div id="contentToPrint" class="modal-body">
+                <div>
+                    <h4 class="table_timeshest"
+                        style="color: #386997;font-size:2rem;margin: 1rem 0;text-align: center;font-weight: 600;">
+                        Danh sách các các lần khám</h4>
+                </div>
+                <div class="col">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Lần khám thứ</th>
+                                <th>Phòng KCB</th>
+                                <th>Tên bác sĩ</th>
+                                <th>Tên bệnh nhân</th>
+                                <th>Ngày tạo</th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody pat_id="{{this.pat_id}}" class="tbody_add_medical show_data_json_para">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+
+
+
+{{#each listPatients}}
+<div class="modal fade " id="prescription{{this.pat_id}}" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+
+            <div id="contentToPrint" class="modal-body">
+                <div>
+                    <h4 class="table_timeshest"
+                        style="color: #386997;font-size:2rem;margin: 1rem 0;text-align: center;font-weight: 600;">
+                        Danh sách các toa thuốc cũ</h4>
+                </div>
+                <div class="col">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Mã toa thuốc</th>
+                                <th>Cơ sở KCB</th>
+                                <th>Tên bác sĩ</th>
+                                <th>Tên bệnh nhân</th>
+                                <th>Ngày tạo</th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody pat_id="{{this.pat_id}}" class="tbody_add_medical show_data_json_pre">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{#each listPre}}
+<div class="modal fade " id="prescription_detail{{this.pre_id}}" tabindex="-1" role="dialog"
+    aria-labelledby="pdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+
+            <div id="contentToPrint" class="modal-body">
+                <div>
+                    <h4 class="table_timeshest"
+                        style="color: #386997;font-size:2rem;margin: 1rem 0;text-align: center;font-weight: 600;">
+                        Chi tiết toa thuốc</h4>
+                </div>
+                <div class="col">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Mã thuốc</th>
+                                <th>Tên thuốc</th>
+                                <th>Số lượng</th>
+                                <th>Số Lần/ngày</th>
+                                <th>Số ngày</th>
+                                <th>Tổng số lượng</th>
+                                <th>Chỉ định</th>
+                                <th>Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody pre_id="{{this.pre_id}}"
+                            class="tbody_add_medical tbody_show_list_medicine tbody_add_medical_check">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+<form class="form">
+    <input id="hidden_med_id" type="hidden" name="med_id" value="">
+</form>
+<script>
+
+    const color_random = document.querySelectorAll('.color_random')
+    const inphieu = document.querySelectorAll('.inphieu')
+    const pay = document.querySelectorAll('.pay')
+    color_random.forEach((item, i) => {
+        const paid = item.getAttribute('color')
+        if (paid == 1) {
+            item.classList.add('active')
+            item.onclick = (e) => {
+                e.preventDefault();
+            }
+            for (let a = 0; a < pay.length; a++) {
+                pay[i].innerText = ''
+                pay[i].innerText = 'Đã đóng tiền'
+            }
+        }
+    })
+
+
+    const show_data_json_para = document.querySelectorAll('.show_data_json_para')
+    show_data_json_para.forEach(data_json_para => {
+        const pat_id_show_data = data_json_para.getAttribute('pat_id')
+        fetch('http://localhost:3000/json/list_paraclinical')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (results1) {
+                let arr = ''
+                results1.filter(results => {
+                    const pat_id = Number((results.pat_id));
+                    const date = results.date;
+                    const doc_name = results.doc_name;
+                    const pat_name = results.pat_name;
+                    const pi_id = results.pi_id;
+                    const path_name = results.path_name;
+
+                    if (pat_id_show_data == pat_id) {
+                        arr += `
+                            <tr>
+                                <td style='color:#000'>DH0000</td>
+                                <td style='color:#000'>${path_name}</td>
+                                <td style='color:#000'>${doc_name}</td>
+                                <td style='color:#000'>${pat_name}</td>
+                                <td style='color:#000'>${date}</td>
+                                <td><button  data-toggle="modal"  data-target="#para_detail${pi_id}" type="button" class="btn btn-light btn-sm">Xem chi tiết</button></td>
+                            </tr>
+                             `;
+                    }
+                });
+                data_json_para.innerHTML = arr;
+            });
+    })
+
+
+
+
+    const show_data_json_pre = document.querySelectorAll('.show_data_json_pre')
+    show_data_json_pre.forEach(data_json_pre => {
+        const pat_id_show_data = data_json_pre.getAttribute('pat_id')
+        fetch('http://localhost:3000/json/list_prescription')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (results1) {
+                let arr = ''
+                results1.filter(results => {
+                    const pat_id = Number((results.pat_id));
+                    const date = results.date;
+                    const doc_name = results.doc_name;
+                    const pat_name = results.pat_name;
+                    const pre_id = results.pre_id;
+
+                    if (pat_id_show_data == pat_id) {
+                        arr += `
+                            <tr>
+                                <td style='color:#000'>DH0000${pre_id}</td>
+                                <td style='color:#000'>Phòng khám dịch vụ</td>
+                                <td style='color:#000'>${doc_name}</td>
+                                <td style='color:#000'>${pat_name}</td>
+                                <td style='color:#000'>${date}</td>
+                                <td><button  data-toggle="modal"  data-target="#prescription_detail${pre_id}" type="button" class="btn btn-light btn-sm">Xem chi tiết</button></td>
+                            </tr>
+                             `;
+                    }
+                });
+                data_json_pre.innerHTML = arr;
+            });
+    })
+
+
+    const tbody_show_list_medicine = document.querySelectorAll('.tbody_show_list_medicine')
+    tbody_show_list_medicine.forEach(list_medicine => {
+        const pre_id_show = list_medicine.getAttribute('pre_id')
+        fetch('http://localhost:3000/json/detail_prescription')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (results1) {
+                let arr = ''
+                results1.filter(results => {
+                    const med_id = Number((results.med_id));
+                    const pre_id = Number((results.pre_id));
+                    const quantity_time = Number((results.quantity_time));
+                    const quantity_day = Number((results.quantity_day));
+                    const quantity_day_use = Number((results.quantity_day_use));
+                    const total_quantity = Number((results.total_quantity));
+                    const use_only = results.use_only;
+                    const total_price = Number((results.total_price));
+                    const med_name = results.med_name;
+                    const DONVI = results.DONVI;
+
+
+                    if (pre_id_show == pre_id) {
+                        arr += `
+                            <tr>
+                                <td style='color:#000'>DH0000${med_id}</td>
+                                <td style='color:#000'>${med_name}</td>
+                                <td style='color:#000'>${quantity_time} ${DONVI}</td>
+                                <td style='color:#000'>${quantity_day}</td>
+                                <td style='color:#000'>${quantity_day_use}</td>
+                                <td style='color:#000'>${total_quantity} ${DONVI}</td>
+                                <td style='color:#000'>${use_only}</td>
+                                <td style='color:#000'>${total_price} VND</td>
+                            </tr>
+                             `;
+                    }
+                });
+                list_medicine.innerHTML = arr;
+            });
+    })
+
+
+
+    const thead = document.querySelector('.thead')
+    if (document.cookie.premise) {
+        console.log(123)
+    }
+    const search_hidden = document.querySelector('.search_hidden')
+    const value_premise = document.querySelector('.value_premise')
+
+
+
+</script>
+<style>
+    tr td,
+    tr th {
+        vertical-align: middle !important;
+
+    }
+
+    .form_hidden_show_info {
+        display: flex;
+        display: none;
+        width: 40%;
+        background-color: #2a3f54;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 40%;
+        left: 50%;
+        flex-direction: column;
+        padding: 2rem 2rem;
+        box-shadow: rgba(0, 0, 0, 0.355) 0px 54px 55px, rgba(0, 0, 0, 0.251) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    .form_hidden_show_info.active {
+        display: block !important;
+    }
+
+    .form_hidden_show_info .swapper_arr_patient tbody tr {
+        border: none;
+    }
+
+    .form_hidden_show_info .swapper_arr_patient tbody tr td {
+        color: #fff;
+        padding: .5rem 0;
+    }
+
+    .form_hidden_show_info .swapper_arr_patient tbody tr td input,
+    .form_hidden_show_info .swapper_arr_patient tbody tr td select {
+        width: 100%;
+        padding: .2rem .3rem;
+    }
+
+    .form_hidden_show_info .swapper_arr_patient tbody tr td select {
+        padding: .3rem .3rem;
+    }
+
+    .modal-dialog {
+        max-width: 65%;
+    }
+
+    tr th,
+    tr td {
+        text-align: center !important;
+        font-size: 1.4rem !important;
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu>a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover>a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left>.dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+
+    div.dataTables_wrapper div.dataTables_length label {
+        text-align: left;
+        white-space: nowrap;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 0.85em;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate .paginate_button {
+        cursor: pointer;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>thead>tr>th {}
+
+    .color_random.active {
+        color: red;
+    }
+
+
+    .arrowHidden {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+    }
+
+    #app .header_container #login_hidden {
+        display: none !important;
+    }
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+
+
+    @media (min-width: 1025px) {
+        .h-custom {}
+    }
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #a1c4fd;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))
+    }
+
+    .bg-indigo {
+        background-color: #4835d4;
+    }
+
+    @media (min-width: 992px) {
+        .card-registration-2 .bg-indigo {
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .card-registration-2 .bg-indigo {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+    }
+</style>

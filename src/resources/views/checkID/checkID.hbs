@@ -1,0 +1,90 @@
+<div class="searchID">
+    <form method="post" class="actionHandle" action="">
+        <div class="form-group a">
+            <label for="exampleInputEmail1">Nhập Mã Số Bệnh Nhân</label>
+            <input name="id" required type="text" class="form-control valueID" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="BN001">
+        </div>
+        <button type="submits" class="btn btn-primary btn-lg btn-block">Xem kết quả</button>
+    </form>
+    {{#each message}}
+    <input value={{message}} type="hidden" class="mess">
+    <script>
+        const mess = document.querySelector('.mess')
+        alert(mess.value)
+    </script>
+    {{/each}}
+</div>
+{{!-- actionHandle.addEventListener('submit', (e) => {
+e.preventDefault();
+const location = window.location.href
+actionHandle.action = `${location}s`
+actionHandle.submit()
+}) --}}
+<script>
+    const actionHandle = document.querySelector('.actionHandle')
+    const valueID = document.querySelector('.valueID')
+
+</script>
+<style>
+    #app .header_container.active #login_hidden {
+        display: none !important;
+    }
+
+    #app_content {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .searchID {
+        width: 100%;
+        height: 30vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .searchID form {
+        width: 60%;
+    }
+
+    .searchID form .a {
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .searchID form .a label {
+        width: 400px;
+        font-weight: 600;
+    }
+
+    .searchID form .a input {
+        height: 4rem;
+        font-size: 1.5rem;
+    }
+
+    #app .header_container #login_hidden {
+        display: none !important;
+    }
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+</style>

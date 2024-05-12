@@ -1,0 +1,93 @@
+#app .header_container nav .menu_header .nav-item {
+    position: relative;
+}
+
+#app .header_container nav .menu_header .nav-item:hover .sub_menu {
+    display: block;
+}
+
+#app .add_info_container {
+    max-height: 80rem;
+    overflow-y: auto;
+}
+
+#app .header_container nav .menu_header .nav-item .sub_menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    width: 180%;
+    height: auto;
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    background-color: #053605;
+    background: linear-gradient(to top, #fbf6f6, transparent);
+}
+
+
+#app .header_container nav .menu_header .nav-item .sub_menu .nav-item {
+    width: 100%;
+    padding:
+}
+
+#app .header_container nav .menu_header .nav-item .sub_menu .nav-item:hover .nav-link {
+    color: #032103;
+}
+
+#app .header_container nav .menu_header .nav-item .sub_menu .nav-item .nav-link {
+    color: #389038;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+/* #app .header_container.active {} */
+#app .header_container.active nav .logo_image {
+    display: none !important;
+}
+
+#app .header_container.active nav .logo_image2 {
+    display: block !important;
+    width: 30%;
+    height: 30%;
+}
+
+#app .header_container.active #login_hidden {
+    position: absolute !important;
+    width: 15% ! important;
+    /* height: 100% ! important; */
+    padding: 1rem 0 0 1rem !important;
+    display: flex !important;
+    flex-direction: column;
+    /* background-color: #335fc4; */
+    border: none !important;
+}
+
+#app .header_container.active nav .menu_header .nav-item {
+    display: block;
+    padding-top: .3rem;
+}
+
+#app .header_container.active nav .menu_header .nav-item .nav-link {}
+
+#app .header_container.active nav .menu_header .nav-item .nav-link {
+    font-size: 1.7rem;
+}
+
+#app .header_container.active nav .menu_header .nav-item .sub_menu .nav-item .nav-link {
+    color: #335fc8;
+    font-weight: 600;
+}
+
+#app .header_container.active nav .menu_header .nav-item .sub_menu .nav-item:hover .nav-link {
+    color: #fff;
+    background-color: #335fc8;
+}
+
+#app .header_container.active nav .menu_header .nav-item:hover .sub_menu {
+    left: 80%;
+    right: 0;
+    top: 0;
+}
+
+#app .header_container nav .menu_header {
+    max-height: 30rem;
+}

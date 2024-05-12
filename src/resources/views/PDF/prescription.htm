@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Phiếu khám bệnh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 700px;
+            margin: 0 auto;
+        }
+
+        h1,
+        h2,
+        h3 {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .signature-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .footer {
+            text-align: right;
+            margin-top: 50px;
+            font-size: 18px;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .signature-label-bn {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .signature-bn {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Phiếu khám bênh</h1>
+    <div class="section">
+        <h2 class="section-title">Thông tin bệnh nhân</h2>
+        <p><strong>Tên bệnh nhân:</strong>{{#each homie}}{{this.name}}{{/each}}</p>
+        <p><strong>Tên phòng khám:</strong> Phòng khám nội tổng hợp An Bình</p>
+    </div>
+    <div class="section">
+        <table>
+            <thead>
+                <tr>
+                    <th>Số lương</th>
+                    <th>Tên người nôp </th>
+                    <th>Số tiền </th>
+                    <th>Lý do nộp </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each homie}}
+                <tr>
+                    <td>1</td>
+                    <td>{{this.homie_name}}</td>
+                    <td>25.000 VND</td>
+                    <td>Đóng tiền khám bệnh</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="signature">
+        <div class="signature-label">Chữ ký của bác sĩ điều trị:</div>
+        <div class="signature-name">__________</div>
+    </div>
+    <div class="signature-bn">
+        <div class="signature-label-bn">Chữ ký của thân nhân:</div>
+        <div class="signature-name">__________</div>
+    </div>
+    <div class="footer">Ngày tạo toa: {{date}}</div>
+</body>

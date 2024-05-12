@@ -1,0 +1,550 @@
+<div class="container">
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="inbox_people">
+                <div class="headind_srch">
+                    <div class="recent_heading">
+                        <h4>Gần đây</h4>
+                    </div>
+                </div>
+                <div class="inbox_chat">
+                    <div class="chat_list">
+
+                        {{#each chat}}
+                        <div c_sdt="{{this.c_sdt}}" style="cursor: pointer;" class="chat_people">
+                            <div class="chat_img"> <img
+                                    src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png"
+                                    alt="sunil"> </div>
+                            <div class="chat_ib">
+                                <h5>84+ {{this.c_sdt}}
+                                    {{!-- <span class="chat_date">Dec 25</span> --}}
+                                    <span c_sdt="{{this.c_sdt}}" class="new_mess" style="color:red">
+                                        {{#if (eq this.check_send_mess 0)}}
+                                        New
+                                        {{/if}}
+                                    </span>
+                                </h5>
+                                <p c_sdt="{{this.c_sdt}}" class="mess_detail"></p>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <form method="post" action="/send_message" class="mesgs mess__form">
+                <div style="cursor: pointer;display: flex; justify-content: center; align-items: center;border-bottom: 2px solid #ccc;"
+                    class="chat_peoplel">
+
+                </div>
+                <div id="content" class="msg_history">
+
+                </div>
+                <div class="type_msg">
+                    <div class="input_msg_write">
+                        <input type="hidden" value id="c_sdt">
+                        <input class="input_mess" id="message" type="text" class="write_msg" name="mess"
+                            placeholder="Type a message" />
+                        <button id="sendMessage" class="msg_send_btn btn_mess" type="button">Gửi</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+ 
+    const chat_peoples = document.querySelectorAll('.chat_people');
+
+    chat_peoples.forEach(chat => {
+        chat.onclick = () => {
+            const c_sdt = Number(chat.getAttribute('c_sdt'));
+            document.getElementById('c_sdt').value = c_sdt;
+            const url = 'http://localhost:3000/json_message';
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/update_send_message");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.querySelectorAll('.new_mess').forEach(item => {
+                        const sdt = item.getAttribute('c_sdt')
+                        if (Number(sdt) === Number(c_sdt)) {
+                            item.innerText = ''
+                        }
+                    })
+                    const html = `
+                    <div style="width: 8%;" class="chat_img"> <img
+                            src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" alt="sunil">
+                    </div>
+                    <div class="chat_ib">
+                        <h5 style="margin: 0;font-size: 1.7rem;">84+ ${c_sdt}</h5>
+                    </div>
+                    `
+                    document.querySelector('.chat_peoplel').innerHTML = html
+                    fetch(url)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (results1) {
+                            let arr = '';
+                            const filteredResults = results1.filter(result => {
+                                const c_sdtJS = Number(result.c_sdt);
+                                const mess_detailJS = result.mess_detail;
+                                const checkJS = Number(result.check);
+                                const create_date_timeJS = result.create_date_time;
+                                if (c_sdtJS === c_sdt) {
+                                    if (checkJS == 2) {
+                                        arr += `
+                                <div class="outgoing_msg">
+            <div class="sent_msg">
+                <p>${mess_detailJS}</p>
+                <span class="time_date"> ${create_date_timeJS}</span>
+            </div>
+        </div>
+                                `
+                                    } else {
+                                        arr += `
+                                 <div class="incoming_msg">
+            <div class="incoming_msg_img"> <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" alt="sunil"> </div>
+            <div class="received_msg">
+                <div class="received_withd_msg">
+                    <p>${mess_detailJS}</p>
+                    <span class="time_date"> ${create_date_timeJS}</span>
+                </div>
+            </div>
+        </div>
+                                `
+                                    }
+                                }
+                                document.getElementById('content').innerHTML = arr
+                                scrollToBottom()
+
+
+
+                                return true;
+                            });
+                        });
+                    console.log('đã cập nhật tin nhắn đã xem')
+                }
+            }
+            xhr.send(JSON.stringify({
+                c_sdt
+            }))
+
+
+        };
+    });
+
+
+
+    const mess_details = document.querySelectorAll('.mess_detail')
+    mess_details.forEach(item => {
+        const sdt = item.getAttribute('c_sdt')
+        const url = `http://localhost:3000/json/new_message`
+        fetch(url)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (results1) {
+                const filteredResults = results1.filter(result => {
+                    const c_sdtJS = Number(result.c_sdt);
+                    const mess_detailJS = result.mess_detail;
+                    const check_send_messJS = result.check_send_mess;
+                    if (Number(sdt) === c_sdtJS) {
+                        item.innerText = mess_detailJS
+                    }
+                    return true;
+                });
+            });
+    })
+    document.querySelectorAll('.new_mess').forEach(item => {
+        const sdt = item.getAttribute('c_sdt')
+        const url = `http://localhost:3000/json/new_message`
+        fetch(url)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (results1) {
+                const filteredResults = results1.filter(result => {
+                    const c_sdtJS = Number(result.c_sdt);
+                    const mess_detailJS = result.mess_detail;
+                    const check_send_messJS = result.check_send_mess;
+                    if (Number(sdt) === c_sdtJS) {
+                        if (check_send_messJS == 0) {
+                            item.innerText = 'New'
+                        }
+                    }
+                    return true;
+                });
+            });
+    })
+
+
+
+
+    const formattedTime = () => {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var amOrPm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // Nếu hours là 0 thì chuyển thành 12
+        var formattedTime = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + amOrPm;
+        return formattedTime
+    }
+    const socket = io();
+    let currentSocket = socket; // Sử dụng socket mặc định ban đầu
+
+    socket.on("send", function (data) {
+        const date = `
+        <div class="outgoing_msg">
+            <div class="sent_msg">
+                <p>${data.message}</p>
+                <span class="time_date">${formattedTime()}</span>
+            </div>
+        </div>
+    `;
+        $("#content").append(date);
+        scrollToBottom();
+    });
+    const new_messs = document.querySelectorAll(".new_mess")
+    const chat_list = document.querySelector(".chat_list")
+    const port3002Socket = io('http://localhost:3002');
+    port3002Socket.on('send', function (data) {
+        const sdt = `0${document.getElementById('c_sdt').value}`
+        if (Number(sdt) == Number(data.c_sdt)) {
+            const date = `
+        <div class="incoming_msg">
+            <div class="incoming_msg_img"> <img src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" alt="sunil"> </div>
+            <div class="received_msg">
+                <div class="received_withd_msg">
+                    <p>${data.message}</p>
+                    <span class="time_date">${formattedTime()}</span>
+                </div>
+            </div>
+        </div>
+    `;
+            $("#content").append(date);
+            scrollToBottom();
+        }
+        chat_peoples.forEach(chat => {
+            const sdt = chat.getAttribute('c_sdt')
+            const sdtemit = Number(data.c_sdt)
+            if (Number(sdt) === sdtemit) {
+                chat_list.prepend(chat);
+            }
+        })
+
+        mess_details.forEach(item => {
+            const sdt = item.getAttribute('c_sdt')
+            const sdtemit = Number(data.c_sdt)
+            const messemit = data.message;
+            if (Number(sdt) === sdtemit) {
+                item.innerText = messemit
+            }
+        })
+        new_messs.forEach(item => {
+            const sdt = item.getAttribute('c_sdt')
+            const sdtemit = Number(data.c_sdt)
+            if (Number(sdt) === sdtemit) {
+                item.innerText = "New"
+            }
+        })
+
+    });
+
+    $("#sendMessage").on('click', function (e) {
+        e.preventDefault();
+        const sdt = `0${document.getElementById('c_sdt').value}`
+        var message = $('#message').val();
+        if (!document.getElementById('c_sdt').value) {
+            notification.message('Chưa chọn hôp thoại', 'green', 'exclamation')
+        } else if (message == '') {
+            notification.message('Chưa nhập tin nhắn', 'green', 'exclamation')
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/save_message");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    currentSocket.emit('send', { c_sdt: sdt, message: message });
+                }
+            }
+            xhr.send(JSON.stringify({
+                sdt, message
+            }))
+            $('#message').val('');
+        }
+    });
+
+    // Chuyển đổi giữa socket và port3002Socket
+    $("#switchSocket").on('click', function () {
+        currentSocket = (currentSocket === socket) ? port3002Socket : socket;
+    });
+    function scrollToBottom() {
+        $("#content").scrollTop($("#content")[0].scrollHeight);
+    }
+    window.onload = () => {
+        scrollToBottom()
+    }
+
+</script>
+<style>
+    #app .header_container.active nav .logo_image2 {
+        display: none !important;
+    }
+    #app .header_container.active nav .logo_image3 {
+        display: inline-block !important;
+    }
+    .chat-header {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+        padding: 20px 20px 20px 0;
+        border-bottom: 2px solid white;
+        margin-bottom: 1rem;
+    }
+
+    img {
+        float: left;
+    }
+
+    .chat-about {
+        float: left;
+        padding-left: 10px;
+        margin-top: 6px;
+    }
+
+    .chat-with {
+        font-weight: bold;
+        font-size: 2rem;
+        color: #008000;
+    }
+
+    .chat-num-messages {
+        color: $gray;
+    }
+
+    .fa-star {
+        float: right;
+        color: #D8DADF;
+        font-size: 20px;
+        margin-top: 12px;
+    }
+
+
+    .container {
+        margin: 4rem auto;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    .inbox_people {
+        background: #f8f8f8 none repeat scroll 0 0;
+        float: left;
+        overflow: hidden;
+        width: 40%;
+        border-right: 1px solid #c4c4c4;
+    }
+
+    .inbox_msg {
+        display: flex;
+
+        clear: both;
+        overflow: hidden;
+    }
+
+    .top_spac {
+        margin: 20px 0 0;
+    }
+
+
+    .recent_heading {
+        float: left;
+        width: 40%;
+    }
+
+    .srch_bar {
+        display: inline-block;
+        text-align: right;
+        width: 60%;
+    }
+
+    .headind_srch {
+        padding: 10px 29px 10px 20px;
+        overflow: hidden;
+        border-bottom: 1px solid #c4c4c4;
+    }
+
+    .recent_heading h4 {
+        color: #008000;
+        font-size: 21px;
+        margin: auto;
+    }
+
+    .srch_bar input {
+        border: 1px solid #cdcdcd;
+        border-width: 0 0 1px 0;
+        width: 80%;
+        padding: 2px 0 4px 6px;
+        background: none;
+    }
+
+    .srch_bar .input-group-addon button {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        border: medium none;
+        padding: 0;
+        color: #707070;
+        font-size: 18px;
+    }
+
+    .srch_bar .input-group-addon {
+        margin: 0 0 0 -27px;
+    }
+
+    .chat_ib h5 {
+        font-size: 15px;
+        color: #464646;
+        margin: 0 0 8px 0;
+    }
+
+    .chat_ib h5 span {
+        font-size: 13px;
+        float: right;
+    }
+
+    .chat_ib p {
+        font-size: 14px;
+        color: #989898;
+        margin: auto;
+        max-height: 2rem;
+    }
+
+    .chat_img {
+        float: left;
+        width: 11%;
+    }
+
+    .chat_ib {
+        float: left;
+        padding: 0 0 0 15px;
+        width: 88%;
+    }
+
+    .chat_people {
+        overflow: hidden;
+        clear: both;
+    }
+
+    .chat_list {
+        border-bottom: 1px solid #c4c4c4;
+        margin: 0;
+        padding: 18px 16px 10px;
+    }
+
+    .inbox_chat {
+        height: 550px;
+        overflow-y: scroll;
+    }
+
+    .active_chat {
+        background: #ebebeb;
+    }
+
+    .incoming_msg_img {
+        display: inline-block;
+        width: 6%;
+    }
+
+    .received_msg {
+        display: inline-block;
+        padding: 0 0 0 10px;
+        vertical-align: top;
+        width: 92%;
+    }
+
+    .received_withd_msg p {
+        background: #ebebeb none repeat scroll 0 0;
+        border-radius: 3px;
+        color: #646464;
+        font-size: 14px;
+        margin: 0;
+        padding: 5px 10px 5px 12px;
+        width: 100%;
+    }
+
+    .time_date {
+        color: #747474;
+        display: block;
+        font-size: 12px;
+        margin: 8px 0 0;
+    }
+
+    .received_withd_msg {
+        width: 57%;
+    }
+
+    .mesgs {
+        padding: 0 15px 0 25px;
+        width: 60%;
+    }
+
+    .sent_msg p {
+        background: #008000 none repeat scroll 0 0;
+        border-radius: 3px;
+        font-size: 14px;
+        margin: 0;
+        color: #fff;
+        padding: 5px 10px 5px 12px;
+        width: 100%;
+    }
+
+    .outgoing_msg {
+        overflow: hidden;
+        margin: 26px 0 26px;
+    }
+
+    .sent_msg {
+        float: right;
+        width: 46%;
+    }
+
+    .input_msg_write input {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        border: medium none;
+        color: #4c4c4c;
+        font-size: 15px;
+        min-height: 48px;
+        width: 100%;
+    }
+
+    .type_msg {
+        border-top: 1px solid #c4c4c4;
+        position: relative;
+    }
+
+    .msg_send_btn {
+        background: #008000 none repeat scroll 0 0;
+        border: medium none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 17px;
+        height: 33px;
+        position: absolute;
+        right: 0;
+        top: 11px;
+        width: 8rem;
+    }
+
+    .messaging {
+        padding: 0 0 1rem 0;
+    }
+
+    .msg_history {
+        margin-top: 2rem;
+        height: 53rem;
+        overflow-y: auto;
+    }
+</style>

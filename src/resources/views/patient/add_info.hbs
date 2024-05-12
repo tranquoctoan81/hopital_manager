@@ -1,0 +1,658 @@
+<div class="add_info_container">
+    <div class="add_info_header" style="
+    padding-left: 4rem;
+    margin-bottom: 2rem;
+">
+        <h1>Tiếp nhận bệnh nhân</h1>
+        <div>
+            <p class="place">Khu Vực: <span>Tiếp nhận bệnh nhân</span></p>
+            <div class="place">Lễ tân: <span>{{#each doctor_name}}{{this.doc_name}}{{/each}}</span></div>
+        </div>
+    </div>
+    <div class="add_info_detail">
+        <form method="post" action="/add_info_patient_handle" class="h-100 h-custom add_info_patient_handle">
+            <!--gradient-custom-2 -->
+            <div class="container   h-100">
+                <div class="row d-flex justify-content-center align-items-top h-100">
+                    <div class="col-12">
+                        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                            <div class="card-body p-0">
+                                <div class="row g-0">
+                                    <input type="hidden" name="se_id" id="se_id">
+                                    <div class="col-lg-6 bg-indigo text-white" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;border-bottom-left-radius: 15px;border-top-left-radius:15px">
+                                        <div style="    padding: 1rem 3rem;">
+                                            <h3 style="margin-top: 1rem;" class="fw-normal mb-5">Thông tin bệnh nhân
+                                            </h3>
+
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline form-white">
+                                                    <input required type="text" name="namePatient" id="namePatient"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea2">Họ Tên Bệnh
+                                                        Nhân</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline form-white">
+                                                    <input required type="text" name="address" id="address"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea3">Địa chỉ</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-5 mb-4 pb-2">
+
+                                                    <div class="form-outline form-white">
+                                                        <select style="font-size: 1.3rem;height: 3.05rem;" name="sex"
+                                                            id="sex" class="browser-default custom-select">
+                                                            <option selected></option>
+                                                            <option value="1">Nam</option>
+                                                            <option value="2">Nữ</option>
+                                                        </select>
+                                                        <label class="form-label" for="form3Examplea3">Giới tính</label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-7 mb-4 pb-2">
+
+                                                    <div class="form-outline form-white">
+                                                        <input required type="date" name="date" id="date"
+                                                            class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplea5">Ngày Sinh</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <div class="form-outline form-white wrapper_search_pathological">
+                                                    <select class="form-control form-control-lg" id="path_id"
+                                                        name="path_id" data-live-search="true" required>
+                                                        {{#each listPath}}
+                                                        <option value={{this.path_id}} data-tokens={{this.path_id}}>
+                                                            {{this.path_name}}
+                                                        </option>
+                                                        {{/each}}
+                                                    </select>
+                                                    <label style="margin-top:1rem" class="form-label"
+                                                        for="form3Examplea9">Bênh lý</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="mb-4 form_search_premise">
+                                                <div style="height: 3rem;"
+                                                    class="custom-select form-control form-control-lg"
+                                                    id="myCustomSelect">
+                                                    <div style="position: absolute;top: 50%;left: 0%;transform: translate(0%, -50%);"
+                                                        class=" select-box form-control-lg">Chọn tiền cận
+                                                    </div>
+                                                    <ul class="options ">
+                                                        {{#each listPremise}}
+                                                        <li name="{{this.pre_name}}" data-value={{this.pre_id}}>
+                                                            {{this.pre_name}}</li>
+                                                        {{/each}}
+                                                    </ul>
+                                                </div>
+                                                <label style="margin-top:1rem" class="form-label"
+                                                    for="form3Examplea9">Tiền Cận</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6"
+                                        style="background-color:#fff;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;border-bottom-right-radius: 15px;border-top-right-radius:15px">
+                                        <div style="padding: 4rem 3rem;">
+                                            <h3 class="fw-normal mb-5" style="color:#4835d4;margin-top: 2rem;"></h3>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-4 pb-2">
+
+                                                    <div class="form-outline">
+                                                        <input required  type="email" name="pat_email" id="pat_email"
+                                                            class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplev2">Email</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="listIdPremise" id="listIdPremise" value="">
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline">
+                                                    <input id="pat_number"  required type="number" name="pat_number" id="pat_number"
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplev4">Số điện thoại</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline">
+                                                    <input id="pat_cccd" required type="number" name="pat_cccd" id="pat_cccd" 
+                                                        class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplev4">Số căn cước công dân</label>
+                                                </div>
+                                            </div>
+                                             <button type="submit" style="background-color: #4835d4;color:#fff;margin-top: 11rem;" class="btn btn-light btn-lg submitFormAddInfo"
+                                                data-mdb-ripple-color="dark">Tiếp Nhận</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="add_info_header d-flex justify-content-start align-center" style="
+    padding-left: 4rem; margin-top:4rem
+">
+        <h1 class="col-sm-7" style="display: inline-block;">Danh sách bệnh nhân đăng ký khám bệnh online </h1>
+        {{!-- <div style="    font-size: 2.2rem;
+    font-weight: 600;
+    margin-top: 1rem;" class="col-sm-4 sidebar-box search-form-wrap">
+            <form action="#" class="search-form">
+                <div style="margin: 0" class="form-group">
+                    <span class="icon fa fa-search"></span>
+                    <input style="font-size:1.4rem" type="number" class="form-control form_search_sdt  form-control-lg"
+                        id="s" placeholder="Nhập số điện thoại khách hàng">
+                </div>
+            </form>
+        </div> --}}
+    </div>
+    <div class="list_patient">
+        <div>
+            <div id="listPatient" class="card-body">
+
+                <div class="table-responsive">
+                    <table id="datatable" class="table   data-table" style="width: 100%">
+                        <thead style="background-color:#335fc4" class="thead-inverse">
+                            <tr style="font-size:1.4rem;color:#fff;">
+                                <th>STT</th>
+                                <th>Tên Bệnh Nhân</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày khám</th>
+                                <th>Giờ khám mong muốn</th>
+                                <th>Chi tiết</th>
+                                <th>Lựa chọn</th>
+                            </tr>
+                        </thead>
+                        <tbody class="show_search_number">
+                            {{#each list_schedule_examination}}
+                            <tr>
+                                <th style="text-align:center;font-size: 1.5rem;" scope="row">{{sum @index 1}}</th>
+                                <th style="text-align:left;cursor: pointer;">{{this.se_name}}</th>
+                                <th>0{{this.se_number}}</th>
+                                <th>{{this.date}}</th>
+                                <th>{{this.se_time}}</th>
+                                <th>{{this.se_detail}}</th>
+                                <th>
+                                    <button type="button" se_id="{{this.se_id}}" class="btn btn-danger btn_delete_info_patient">Xóa</button>
+                                    <button type="button" se_email="{{this.se_email}}" se_sex="{{this.se_sex}}" se_old="{{this.date_se_old}}" se_address="{{this.se_address}}" se_name="{{this.se_name}}" se_id="{{this.se_id}}"
+                                        se_number="{{this.se_number}}" class="btn btn-primary btn_add_info_patient">Tiếp
+                                        nhận</button></th>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<form class="form">
+    <input id="hidden_med_id" type="hidden" name="med_id" value="">
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+    //const form_search_sdt = document.querySelector('.form_search_sdt')
+    //const show_search_number = document.querySelector('.show_search_number')
+    //const url = 'http://localhost:3000/json/schedule_examination';
+    //fetch(url)
+    //    .then(function (response) {
+    //        return response.json();
+    //    })
+     //   .then(function (results1) {
+     //       form_search_sdt.onkeyup = (e) => {
+    //            const inputData = e.target.value;
+     //           const arrS = results1.filter((results) => {
+     //               const dataF = `0${results.se_number}`
+     //               if (!inputData) {
+     //                   return dataF;
+     //               }
+     //               if (dataF.includes(inputData)) {
+     //                   return dataF
+     //               }
+     //           })
+      //          const hbs = arrS.map(function (arr) {
+     //               return `
+     //                      <tr>
+     //                           <th style="text-align:center;font-size: 1.5rem;" scope="row">${arr.se_id}</th>
+     //                           <th style="text-align:left;cursor: pointer;">${arr.se_name}</th>
+     //                           <th>0${arr.se_number}</th>
+     //                           <th>${arr.date}</th>
+     //                           <th>${arr.se_time}</th>
+     //                           <th>${arr.se_detail}</th>
+     //                           <th><button type="button" se_name="${arr.se_name}" se_id="${arr.se_id}"
+     //                                   se_number="${arr.se_number}" class="btn btn-primary btn_add_info_patient">Tiếp
+     //                                   nhận</button></th>
+     //                       </tr>
+     //                         `
+    //            })
+     //           show_search_number.innerHTML = hbs.join('')
+     //           const btn_add_info_patient = document.querySelectorAll('.btn_add_info_patient')
+     //           btn_add_info_patient.forEach(item => {
+     //               item.onclick = () => {
+     //                   update(item)
+      //              }
+      //          })
+      //      }
+      //  })
+//
+
+
+
+
+
+     
+
+
+    const customSelect = document.getElementById('myCustomSelect');
+    const selectBox = customSelect.querySelector('.select-box');
+    const optionsList = customSelect.querySelector('.options');
+    const options = customSelect.querySelectorAll('.options li');
+
+    let selectedOptions = [];
+    let selectedTexts = [];
+
+    selectBox.addEventListener('click', () => {
+        optionsList.style.display = optionsList.style.display === 'block' ? 'none' : 'block';
+    });
+
+    options.forEach(option => {
+        option.onclick = () => {
+            const value = option.getAttribute('data-value');
+            const name = option.getAttribute('name');
+            if (selectedOptions.includes(value)) {
+                selectedOptions = selectedOptions.filter(item => item !== value);
+                selectedTexts = selectedTexts.filter(item => item !== name);
+            } else {
+                selectedOptions.push(value);
+                selectedTexts.push(name);
+            }
+            updateSelectedOptions();
+        };
+    });
+    const configTime = (time) => {
+        const parts = time.split("/");
+        const ngay = parts[0];
+        const thang = parts[1];
+        const nam = parts[2];
+        const date = nam + "-" + thang + "-" + ngay;
+        return date
+    }
+    const update = (item) => {
+        const se_number = item.getAttribute('se_number')
+        const se_name = item.getAttribute('se_name')
+        const se_id = item.getAttribute('se_id')
+        const se_email = item.getAttribute('se_email')
+        const se_sex = item.getAttribute('se_sex')
+        const se_old = item.getAttribute('se_old')
+        const se_address = item.getAttribute('se_address')
+        document.getElementById('namePatient').value = se_name
+        document.getElementById('pat_number').value = se_number
+        document.getElementById('address').value = se_address
+        document.getElementById('sex').value = se_sex
+        document.getElementById('date').value = configTime(se_old)
+        document.getElementById('pat_email').value = se_email
+        document.getElementById('pat_number').value = se_number
+        document.getElementById('se_id').value = se_id
+        const select = document.getElementById('sex');
+
+        // Sử dụng vòng lặp
+        for (const option of select.options) {
+    console.log(option)
+            if (option.value === se_sex) {
+                option.setAttribute("selected", true);
+                break;
+            }
+        }
+       
+       
+    }
+    const btn_add_info_patient = document.querySelectorAll('.btn_add_info_patient')
+    btn_add_info_patient.forEach(item => {
+        item.onclick = () => {
+            update(item)
+        }
+    })
+
+    const btn_delete_info_patient = document.querySelectorAll('.btn_delete_info_patient')
+    btn_delete_info_patient.forEach(item => {
+        item.onclick = () => {
+            const se_id = item.getAttribute('se_id')
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/delete_schedule_examination");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    setTimeout(() => {
+                        location.reload()
+                    },1500)
+                    notification.message('Xóa thành công', 'green', 'check')
+                }
+            }
+            xhr.send(JSON.stringify({
+                se_id
+            }))
+        }
+    })
+
+    function updateSelectedOptions() {
+        options.forEach(option => {
+            const value = option.getAttribute('data-value');
+            const name = option.getAttribute('name');
+            if (selectedOptions.includes(value)) {
+                option.classList.add('selected');
+            } else {
+                option.classList.remove('selected');
+            }
+
+        });
+        const selectedText = selectedOptions.join(', ');
+        const selectedTextss = selectedTexts.join(', ');
+        selectBox.textContent = selectedTextss || 'Chọn tùy chọn';
+    }
+
+    document.addEventListener('click', (e) => {
+        if (!customSelect.contains(e.target)) {
+            optionsList.style.display = 'none';
+        }
+    });
+
+    // Mặc định chọn một số tùy chọn
+    updateSelectedOptions();
+
+
+
+
+
+    const add_info_patient_handle = document.querySelector('.add_info_patient_handle')
+    const submitFormAddInfo = document.querySelector('.submitFormAddInfo')
+    submitFormAddInfo.onclick = (e) => {
+        const listIdPremise = document.getElementById("listIdPremise")
+        listIdPremise.value = selectedOptions
+    }
+    
+
+
+    const color_random = document.querySelectorAll('.color_random')
+    const inphieu = document.querySelectorAll('.inphieu')
+    const pay = document.querySelectorAll('.pay')
+    color_random.forEach((item, i) => {
+        const paid = item.getAttribute('color')
+        if (paid == 1) {
+            item.classList.add('active')
+            item.onclick = (e) => {
+                e.preventDefault();
+            }
+            for (let a = 0; a < pay.length; a++) {
+                pay[i].innerText = ''
+                pay[i].innerText = 'Đã đóng tiền'
+            }
+        }
+    })
+
+
+
+    const thead = document.querySelector('.thead')
+    if (document.cookie.premise) {
+        console.log(123)
+    }
+    const search_hidden = document.querySelector('.search_hidden')
+    const value_premise = document.querySelector('.value_premise')
+
+
+</script>
+<style>
+    input[type="number"] {
+        disabled: true;
+    }
+
+    .sidebar {}
+
+    .sidebar-box {
+        font-size: 15px;
+        width: 100%;
+        float: left;
+        background: #fff;
+    }
+
+    .search-form-wrap {
+        display: block;
+    }
+
+
+    .search-form .form-group {
+        position: relative;
+    }
+
+    .search-form .form-group #s {
+        padding-right: 50px;
+        background: lighten(black, 97%);
+        padding: 15px 15px;
+        border: none;
+    }
+
+    .search-form .icon {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+    }
+
+
+    label {
+        font-size: 1.4rem;
+    }
+
+    tr th,
+    tr td {
+        text-align: center !important;
+        font-size: 1.4rem !important;
+        font-weight: 500;
+        vertical-align: middle !important;
+    }
+
+    .custom-select {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .select-box {
+        font-size: 1.2rem;
+    }
+
+    .options {
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 10rem;
+        position: absolute;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+        overflow-y: auto;
+        background-color: #fff;
+    }
+
+    .options li {
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .options li.selected {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu>a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover>a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left>.dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+
+    div.dataTables_wrapper div.dataTables_length label {
+        text-align: left;
+        white-space: nowrap;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 0.85em;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate .paginate_button {
+        cursor: pointer;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>thead>tr>th {}
+
+    .color_random.active {
+        color: red;
+    }
+
+
+    .arrowHidden {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+    }
+
+    #app .header_container #login_hidden {}
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+
+
+    @media (min-width: 1025px) {
+        .h-custom {}
+    }
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #a1c4fd;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))
+    }
+
+    .bg-indigo {
+        background-color: #4835d4;
+    }
+
+    @media (min-width: 992px) {
+        .card-registration-2 .bg-indigo {
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .card-registration-2 .bg-indigo {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+    }
+</style>

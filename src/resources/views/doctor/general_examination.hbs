@@ -1,0 +1,516 @@
+<div class="add_info_container">
+    <div class="add_info_header" style="
+    padding-left: 4rem;
+    margin-bottom: 2rem;
+">
+        <h1>Kiểm tra thể trạng và đo số liệu ý tế</h1>
+        <div>
+            <p class="place">Khu Vực: <span>Khám tổng quát</span></p>
+            {{!-- <div class="place">Lễ tân: <span>{{#each doctor_name}}{{this.doc_name}}{{/each}}</span></div> --}}
+        </div>
+    </div>
+    <div class="add_info_detail" style="padding-left: 4rem; margin-bottom: 2rem;">
+        <p style=" font-size:1.4rem;font-style: italic; margin : 0 !important;
+    font-weight: 500;" class="">Bệnh nhân: <span style="font-size:1.8rem;" class="doc_name_insert"></span></p>
+        <div class="d-flex detail_examination">
+            <form action="/add_examination" class="swapper swapper_post_exa">
+                <input type="hidden" id="pat_id" class="pat_id_hidden" value="">
+                <div class="examination_left">
+                    <div class="detail">
+                        <div>
+                            <h4>Mạch: </h4>
+                            <input required name="vascular" id="vascular" type="text" value="">
+                            <span> Lần</span>
+                        </div>
+                        <div>
+                            <h4>Nhiệt độ: </h4>
+                            <input required name="temperature" id="temperature" type="text" value="">
+                            <span> Độ C</span>
+                        </div>
+                        <div>
+                            <h4>Nhịp thở: </h4>
+                            <input required name="breathing" id="breathing" type="text" value="">
+                            <span> Lần</span>
+                        </div>
+                        <div>
+                            <h4>Huyết áp: </h4>
+                            <input required name="blood_pressure" id="blood_pressure" type="text" value="">
+                            <span> MmHg</span>
+                        </div>
+                        <div>
+                            <h4>Chiều cao: </h4>
+                            <input required name="height" type="text" id="height" value="">
+                            <span> Cmm</span>
+                        </div>
+                        <div>
+                            <h4>Cân nặng: </h4>
+                            <input required name="weight" type="text" id="weight" value="">
+                            <span> Kg</span>
+                        </div>
+                    </div>
+                    <div class="symptom">
+                        <h4>Triệu chứng: </h4>
+                        <textarea required name="symptom" name="" id="symptom" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="examination_right">
+                    <div class="swapper">
+                        <div>
+                            <h4>Ngày khám: </h4>
+                            <input required name="appointmentDate" type="date" id="datepicker" width="276" />
+                        </div>
+                        <div>
+                            <h4>Loại chuẩn đoán: </h4>
+                            <select name="type" class="custom-select" id="gender2">
+                                <option value="0">Tạm thời</option>
+                                <option value="1">Xác nhận</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg submit_form">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="padding-left: 4rem; margin-bottom: 1rem;margin-top: 4rem;">
+        <h5 style=" font-weight: 600;font-size: 2rem;" class="place">Danh sách bệnh nhân chưa khám
+            tổng quát</h5>
+    </div>
+    <div class="list_patient" style="padding-left: 4rem; margin-bottom: 2rem;">
+        <div>
+            <div id="listPatient" class="card-body">
+                <div class="table-responsive">
+                    <table id="datatable" class="table   data-table" style="width: 100%">
+                        <thead style="background-color:#335fc4" class="thead-inverse">
+                            <tr style="font-size:1.4rem;color:#fff;">
+                                <th>STT</th>
+                                <th>Mã BN</th>
+                                <th>Tên Bệnh Nhân</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày Sinh</th>
+                                <th>Giới Tính</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each listPatients}}
+                            <tr>
+                                <td style="text-align:center;font-size: 1.5rem;" scope="row">{{sum @index 1}}</td>
+                                <td class="choose_patient" id="{{this.pat_id}}" pat_name="{{this.pat_name}}"
+                                    style="cursor: pointer;">BN0000{{this.pat_id}}</td>
+                                <td style="text-align:left;">{{this.pat_name}}</td>
+                                <td style="text-align:left;">0{{this.pat_number}}</td>
+                                <td>{{this.date}}</td>
+                                <td>
+                                    <script>
+                                        if ({{ this.pat_sex }} === 1) {
+                                            document.write('Nam')
+                                        }else {
+                                            document.write('Nữ')
+                                        }
+                                    </script>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    const choose_patient = document.querySelectorAll('.choose_patient')
+    const doc_id = document.querySelector('.doc_id')
+    const doc_name_insert = document.querySelector('.doc_name_insert')
+    const pat_id_hidden = document.querySelector('.pat_id_hidden')
+    choose_patient.forEach(item => {
+        item.onclick = () => {
+            const pat_id = item.getAttribute('id')
+            const pat_name = item.getAttribute('pat_name')
+            pat_id_hidden.value = pat_id
+            doc_name_insert.innerText = pat_name
+        }
+    })
+
+
+    const swapper_post_exa = document.querySelector('.swapper_post_exa')
+    const examination_left = document.querySelector('.examination_left')
+    const examination_right = document.querySelector('.examination_right')
+    swapper_post_exa.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!pat_id_hidden.value) {
+            notification.message('Chưa chọn bệnh nhân', 'red', 'exclamation')
+        } else {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/add_examination");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                    notification.message('Thêm thông tin thành công', 'green', 'check')
+                }
+            };
+            xhr.send(JSON.stringify({
+                pat_id: pat_id_hidden.value,
+                vascular: document.getElementById("vascular").value,
+                temperature: document.getElementById("temperature").value,
+                breathing: document.getElementById("breathing").value,
+                blood_pressure: document.getElementById("blood_pressure").value,
+                height: document.getElementById("height").value,
+                weight: document.getElementById("weight").value,
+                symptom: document.getElementById("symptom").value,
+                datepicker: document.getElementById("datepicker").value,
+                gender2: document.getElementById("gender2").value
+            }));
+        }
+    });
+</script>
+<style>
+    tr td,
+    tr th {
+        text-align: center !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_length label {
+        text-align: left;
+        white-space: nowrap;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 0.85em;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate .paginate_button {
+        cursor: pointer;
+    }
+
+    .detail_examination {
+        margin-top: 0 !important;
+    }
+
+    .detail_examination h2 {
+        color: #d86538;
+        text-align: center;
+        font-size: 2.3rem;
+        font-weight: 600;
+    }
+
+    .detail_examination .swapper {
+        margin: 1rem 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .examination_left {
+        background-color: #e8f0f8;
+        width: 49.5%;
+        display: flex;
+        padding: 1rem 2rem;
+    }
+
+    .examination_left .detail {
+        width: 75%;
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .examination_left .detail div {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .examination_left .detail div h4 {
+        width: 40%;
+        margin: 0;
+        text-align: right;
+        color: #335fc4;
+        font-weight: 600;
+    }
+
+    .examination_left .detail div input {
+        width: 30%;
+        height: 2rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+        padding-left: 1rem;
+        margin: 0 .5rem;
+    }
+
+    .examination_left .detail div span {
+        width: 25%;
+        color: #000;
+        font-size: 1.3rem;
+    }
+
+    .examination_left .symptom {
+        width: 20%;
+    }
+
+    .examination_left .symptom h4 {
+        margin: 0;
+        color: #335fc4;
+        font-weight: 600;
+    }
+
+    .examination_left .symptom textarea {
+        width: 120%;
+        height: 8rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+        padding-left: 1rem;
+        margin: 0 .5rem;
+    }
+
+    .examination_right {
+        background-color: #e8f0f8;
+        width: 49.5%;
+        padding: 1rem 2rem;
+    }
+
+    .examination_right .swapper {
+        display: flex;
+    }
+
+    .examination_right .swapper div {
+        width: 49.5%;
+    }
+
+    .examination_right .swapper div #datepicker {
+        height: 3rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+        padding-left: 1rem;
+        margin: 0 .5rem;
+    }
+
+    .examination_right .swapper div #gender2 {
+        height: 3rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+        padding-left: 1rem;
+        margin: 0 .5rem;
+    }
+
+    .examination_right .submit_form {
+        width: 100%;
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+    }
+
+    .arr_medicine_pre.active {
+        display: block !important;
+    }
+
+    #app .examination_container {
+        max-height: 80rem;
+        overflow-y: auto;
+    }
+
+    .arr.active {
+        display: block !important;
+    }
+
+    .toggle_pre_none {
+        display: none !important;
+    }
+
+    .med_name_list {
+        position: relative;
+    }
+
+    .med_name_list:hover::before {
+        content: "Bạn muốn cập nhật lại thuốc?";
+        display: block;
+        position: absolute;
+        background-color: #626060e1;
+        padding: .5rem;
+        color: #fff;
+        z-index: 1000;
+        top: 70%;
+        left: 50%;
+    }
+
+    caption {
+        caption-side: top;
+        FONT-SIZE: 1.5rem;
+        display: block;
+        text-align: center;
+        font-weight: 600;
+        color: #000
+    }
+
+    .swapper_subclinical_re {
+        cursor: pointer;
+    }
+
+        {
+            {
+            !-- #app {
+                position: relative;
+            }
+
+            #app::after {
+                position: absolute;
+                content: ' ';
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: #00000083;
+                z-index: 100;
+            }
+
+            --
+        }
+    }
+
+
+    .container_confirm,
+    .container_confirm_premise {
+        display: none;
+        background-color: #fff;
+        position: absolute;
+        width: 25%;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 101;
+        padding: 2rem;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+
+
+    .active {
+        display: inline-block !important;
+    }
+
+    .icon_close,
+    .icon_closes {
+        cursor: pointer;
+        position: absolute;
+        top: 1px;
+        right: 15px;
+        font-size: 2rem;
+    }
+
+    .container_confirm thead tr th,
+    .container_confirm_premise tr th {
+        padding: 0 1.5rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .container_confirm tbody tr td,
+    .container_confirm_premise tr td {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 400;
+        padding-right: 1rem;
+    }
+
+    .table-confirm {
+        border: none;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+
+
+    .table-confirm thead th {
+        background-color: #f8f9fa;
+        border: none;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .table-confirm tbody td {
+        background-color: #ffffff;
+        border: none;
+        text-align: center;
+    }
+
+    .table-striped tbody tr:nth-child(odd) td,
+    .table-striped tbody tr:nth-child(odd) th {
+        background-color: #93c2f1;
+    }
+
+    .gj-datepicker-bootstrap [role=right-icon] button .gj-icon,
+    .gj-datepicker-bootstrap [role=right-icon] button .material-icons {
+        position: absolute;
+        font-size: 21px;
+        top: 15%;
+        left: 20%;
+        color: #335fc4;
+    }
+
+    .arrowHidden {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    #app .header_container {
+        width: 100%;
+    }
+
+    #app .header_container #login_hidden {
+        display: none !important;
+    }
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+</style>

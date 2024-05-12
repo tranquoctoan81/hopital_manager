@@ -1,0 +1,1533 @@
+<div class="examination_container">
+    <div class="examination_header">
+        <h1 style="display: flex;
+    align-items: center;">Khám bệnh lần {{#each paraclinicalSum}}{{this.sum}}{{/each}}
+            <button pat_id={{#each result}}{{this.pat_id}}{{/each}} style="margin-left: 1rem;font-size:1.3rem"
+                type="button" class="btn btn-primary re_examination">Tái
+                khám</button>
+        </h1>
+        <div>
+            <p class="place">Khu Vực: <span>khu khám bệnh theo yêu cầu</span></p>
+            <div class="place">Bác sĩ Trực: <span>{{doctorName}}</span></div>
+        </div>
+    </div>
+    <div class="info">
+        <div class="info_wrapper">
+            <div class="info_left">
+                <h2>Thông tin bệnh nhân</h2>
+                <div class="detail">
+                    {{#each result}}
+                    <div class="item">Tên bệnh nhân: <span>{{this.pat_name}}</span></div>
+                    <div class="item">Ngầy sinh: <span>{{this.date}}</span></div>
+                    <div class="item">Địa chỉ: <span>{{this.pat_address}}</span></div>
+                    <div class="item">Tình trạng: <span>Vừa nhập viện</span></div>
+                    <div class="item">Giới tính: <span><select style="background-color:transparent" class="arrowHidden"
+                                value={{this.pat_sex}}>
+                                <option value="1">Nam</option>
+                                <option value="0">Nữ</option>
+                            </select></span></div>
+                    <div class="item">Tiền căn: <span><a pat_id={{this.pat_id}} href=""
+                                class="show_premise">Có</a></span>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="info_right">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:0 1rem 1rem 1rem">
+                    <h2 style="display:inline-block">Chỉ đinh cận lâm sàng</h2>
+                    <button type="button" data-toggle="modal" data-target="#pdfModal"
+                        class="btn btn-primary">Thêm</button>
+                </div>
+                <div class="subclinical">
+                    {{#each result}}
+                    <input class="valueIdPatient" type="hidden" value="{{this.pat_id}}">
+                    {{/each}}
+                </div>
+                <div class="table-responsive text-nowrap swapper_arr_subclinical">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr style="">
+                                <th style="padding:.5rem 0">Mã dịch vụ</th>
+                                <th style="padding:.5rem 0">Tên dịch vụ</th>
+                                <th style="padding:.5rem 0">Tình trạng</th>
+                                <th style="padding:.5rem 0"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="swapper_subclinical">
+                            {{#each result1}}
+                            <tr>
+                                <td style="padding:.5rem 0;vertical-align: middle;">DV00{{this.sub_id}}</td>
+                                <td style="padding:.5rem 0;vertical-align: middle;">{{this.sub_name}}</td>
+                                <td style="padding:.5rem 0;vertical-align: middle;" name='{{this.res_id}}' class="swapper_subclinical_re"></td>
+                                <td style="padding:.5rem 0;vertical-align: middle;" name='{{this.res_id}}' class="">
+                                    <button type="button" dps_id={{this.dps_id}} res_id='{{this.res_id}}' class="btn btn-danger btn-sm delete_sub_item">Xóa</button>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {{#each result2}}
+        <div class="detail_examination">
+            <h2>Chi tiết khám bệnh</h2>
+            <form action="/add_examination" class="swapper swapper_post_exa">
+                <div class="examination_left">
+                    <div class="detail">
+                        <div>
+                            <h4>Mạch: </h4>
+                            <input required name="vascular" id="vascular" readonly type="text"
+                                value={{this.exa_vascular}}>
+                            <span> Lần</span>
+                        </div>
+                        <div>
+                            <h4>Nhiệt độ: </h4>
+                            <input required name="temperature" id="temperature" type="text"
+                                value={{this.exa_temperature}}>
+                            <span> Độ C</span>
+                        </div>
+                        <div>
+                            <h4>Nhịp thở: </h4>
+                            <input required name="breathing" id="breathing" type="text" value={{this.exa_breathing}}>
+                            <span> Lần</span>
+                        </div>
+                        <div>
+                            <h4>Huyết áp: </h4>
+                            <input required name="blood_pressure" id="blood_pressure" type="text"
+                                value={{this.exa_blood_pressure}}>
+                            <span> MmHg</span>
+                        </div>
+                        <div>
+                            <h4>Chiều cao: </h4>
+                            <input required name="height" type="text" id="height" value={{this.exa_height}}>
+                            <span> Cmm</span>
+                        </div>
+                        <div>
+                            <h4>Cân nặng: </h4>
+                            <input required name="weight" type="text" id="weight" value={{this.exa_weight}}>
+                            <span> Kg</span>
+                        </div>
+                    </div>
+                    <div class="symptom">
+                        <h4>Triệu chứng: </h4>
+                        <textarea required name="symptom" name="" id="symptom" cols="30"
+                            rows="10">{{this.exa_symptom}}</textarea>
+                    </div>
+                </div>
+                <div class="examination_right">
+                    <div class="swapper">
+                        <div>
+                            <h4>Ngày khám khám: </h4>
+                            <input required name="appointmentDate" value={{this.date}} id="datepicker" width="276" />
+                        </div>
+                        <div>
+                            <h4>Loại chuẩn đoán: </h4>
+                            <select name="type" class="custom-select" value="id=&quot;gender2&quot;" style="
+    height: 3rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border: 1px solid #335fc4;
+    outline: none;
+    padding-left: 1rem;
+    margin: 0 0.5rem;
+">
+                                <option value="0">Tạm thời</option>
+                                <option value="1">Xác nhận</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        {{else}}
+        <div class="detail_examination">
+            <h2>Chi tiết khám bệnh</h2>
+            <form action="/add_examination" class="swapper swapper_post_exa">
+                <div class="examination_left">
+                    <div class="detail">
+                        <div>
+                            <h4>Mạch: </h4>
+                            <input required name="vascular" id="vascular" type="text" value="">
+                            <span> Lần</span>
+                        </div>
+                        <div>
+                            <h4>Nhiệt độ: </h4>
+                            <input required name="temperature" id="temperature" type="text" value="">
+                            <span> Độ C</span>
+                        </div>
+                        <div>
+                            <h4>Nhịp thở: </h4>
+                            <input required name="breathing" id="breathing" type="text" value="">
+                            <span> Lần</span>
+                        </div>
+                        <div>
+                            <h4>Huyết áp: </h4>
+                            <input required name="blood_pressure" id="blood_pressure" type="text" value="">
+                            <span> MmHg</span>
+                        </div>
+                        <div>
+                            <h4>Chiều cao: </h4>
+                            <input required name="height" type="text" id="height" value="">
+                            <span> Cmm</span>
+                        </div>
+                        <div>
+                            <h4>Cân nặng: </h4>
+                            <input required name="weight" type="text" id="weight" value="">
+                            <span> Kg</span>
+                        </div>
+                    </div>
+                    <div class="symptom">
+                        <h4>Triệu chứng: </h4>
+                        <textarea required name="symptom" name="" id="symptom" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="examination_right">
+                    <div class="swapper">
+                        <div>
+                            <h4>Ngày khám khám: </h4>
+                            <input required name="appointmentDate" type="date" id="datepicker" width="276" />
+                        </div>
+                        <div>
+                            <h4>Loại chuẩn đoán: </h4>
+                            <select name="type" class="custom-select" id="gender2">
+                                <option value="0">Tạm thời</option>
+                                <option value="1">Xác nhận</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        {{/each}}
+    </div>
+    <div class="list_medical">
+        <h2>lập toa thuốc</h2>
+        <div class="swapper_medical">
+            <form class="detail_medical">
+                <div class="wrapper_search_medical">
+                    <h4>Tìm Tên Thuốc: </h4>
+                    <input required name="med_name" id="med_name" type="text">
+                    <ul class="search_medical">
+                        {{!-- <li><a href="">Thuốc ngứa</a></li> --}}
+                    </ul>
+                </div>
+                <h4 style="color: red;text-align:center" class="checkQuantity"></h4>
+                <div>
+                    <h4 class="update_uNit">Số Lượng / Lần: </h4>
+                    <input required id="quantity_time" type="number" ml="" maxlength="">
+                </div>
+                <div>
+                    <h4>Số Lần / Ngày: </h4>
+                    <input required id="quantity_day" type="number" disabled>
+                </div>
+                <div>
+                    <h4>Số Ngày Dùng: </h4>
+                    <input required id="quantity_day_use" type="number" disabled>
+                </div>
+                <div>
+                    <h4>Chỉ Định Dùng: </h4>
+                    <input required id="use_only" type="text">
+                </div>
+                <input required id="idPatss" value={{#each result}}{{this.pat_id}}{{/each}} type="hidden">
+                <input required id="pre_id" type="hidden" value={{pre_id}}>
+                <input class="btn btn-primary submit" id="submitHandleDeleteAndUpdate" type="submit" value="Thêm thuốc">
+            </form>
+            <div class="arr_medical">
+                <div class="table-responsive text-nowrap swapper_arr_medical">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Loại bỏ</th>
+                                <th>Tên thuốc</th>
+                                <th>Số lượng</th>
+                                <th>Số Lần/ngày</th>
+                                <th>Số ngày</th>
+                                <th>Tổng số lượng</th>
+                                <th>Chỉ định</th>
+                                <th>Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody_add_medical tbody_add_medical_check">
+                            {{#each arr_medical}}
+                            <tr>
+                                <td><a class="deleteItemOnArrMed" total_quantity={{this.total_quantity}}
+                                        u_id="{{this.u_id}}" href="" name={{this.med_id}}>Xóa</a></td>
+                                <td style="cursor: pointer;" total_quantity={{this.total_quantity}}
+                                    quantity_day_use={{this.quantity_day_use}} quantity_day={{this.quantity_day}}
+                                    med_name="{{this.med_name}}" use_only="{{this.use_only}}"
+                                    quantity_time={{this.quantity_time}} med_id="{{this.med_id}}"
+                                    class="tdElement med_name_list med_name_list_check">
+                                    {{this.med_name}}</td>
+                                <td>
+                                    <script>
+                                        if ({{ this.u_id }} === 38) {
+                                            document.write('{{this.quantity_time}} {{this.u_name}} / Toa thuốc')
+                                        }else {
+                                            document.write('{{this.quantity_time}} {{this.u_name}} / Lần')
+                                        }
+                                    </script>
+                                </td>
+                                <td>{{this.quantity_day}}</td>
+                                <td>{{this.quantity_day_use}}</td>
+                                <td>{{this.total_quantity}} {{this.u_name}}</td>
+                                <td>{{this.use_only}}</td>
+                                <td>{{this.total_price}} VND</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="option">
+                    <a class="delete_all_medical" href="">Xóa toa thuốc</a>
+                    <a class="" href="/save_and_create_pre/{{#each result}}{{this.pat_id}}{{/each}}">Lưu và tạo toa
+                        thuốc
+                        mới</a>
+                    <a class="download_prescription"
+                        href="/download/prescription/{{#each result}}{{this.pat_id}}{{/each}}">In toa thuốc</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!-- <div class="list_pre">
+        <h2 class="toggle_pre_show" style="font-size:1.5rem;cursor:pointer;color:#335fc4">Hiển thị các toa thuốc cũ</h2>
+        <h2 class="toggle_pre_none" style="font-size:1.5rem;cursor:pointer;display:none;color:#335fc4">Ẩn các toa thuốc
+            cũ</h2>
+        <div style="display:none" class="arr_medical arr_pre">
+            <div class="table-responsive text-nowrap swapper_arr_medical">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Xuất PDF</th>
+                            <th>Xóa</th>
+                            <th>Cơ sở KCB</th>
+                            <th>Mã toa thuốc</th>
+                            <th>Tên bác sĩ</th>
+                            <th>Tên bệnh nhân</th>
+                            <th>Ngày tạo</th>
+                            <th>Chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody_add_medical">
+                        {{#each arr_pre}}
+                        <tr>
+                            <td><a pre_id="{{this.pre_id}}" class="print_pdf_detail_medicine"><i
+                                        style="color:#335fc4;cursor:pointer;font-size: 1.8rem;"
+                                        class="fa-solid fa-file-pdf "></i></a></td>
+                            <td><a class="delete_pre" pre_id={{this.pre_id}} style="cursor:pointer">Xóa</a></td>
+                            <td>Phòng khám dịch vụ</td>
+                            <td>DH00{{this.pre_id}}</td>
+                            <td>{{this.doc_name}}</td>
+                            <td>{{this.pat_name}}</td>
+                            <td>{{this.date}}</td>
+                            <td><a style="cursor: pointer;" pre_id={{this.pre_id}} class="show_arr_medicine">Xem chi
+                                    tiết</a></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> --}}
+</div>
+
+<div class="modal fade " id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+
+            <div id="contentToPrint" class="modal-body">
+                <div>
+                    <h4 class="table_timeshest"
+                        style="color: #386997;font-size:2rem;margin: 1rem 0;text-align: center;font-weight: 600;">
+                        Thêm chỉ định cận lầm sàng</h4>
+                </div>
+                <div class="col">
+                    <div class="info_rightt">
+                        <div class="subclinical">
+                            <form class="d-flex justify-content-center align-items-center">
+                                <input type="text" class="form-control inValue value_subclinical"
+                                    placeholder="Nhập cận lâm sàng..">
+                            </form>
+                            <ul class="show_search">
+                                {{!-- <li><a href="">Xét nghiệm máu</a></li> --}}
+                            </ul>
+                            <input class="valueIdPatient" type="hidden" value="0">
+                            <input class="valueIdPi" type="hidden" value="0">
+                        </div>
+                        <div class="table-responsive text-nowrap swapper_arr_subclinical">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr style="">
+                                        <th style="padding:.5rem 0">Mã dịch vụ</th>
+                                        <th style="padding:.5rem 0">Tên dịch vụ</th>
+                                        <th style="padding:.5rem 0">Đơn giá</th>
+                                        <th style="padding:.5rem 0">Tình trạng</th>
+                                        <th style="padding:.5rem 0" class="deleted">Loại bỏ</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="swapper_subclinical">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-danger adđ_arr_sub">Thêm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table border="4" class="container_confirm">
+    <caption>kẾT QUẢ CÂN LÂM SÀNG
+        <div class="icon_close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+    </caption>
+    <thead>
+        <tr>
+            <th>Nôi dung</th>
+            <th>Kết quả</th>
+            <th>Ngày có kết quả</th>
+        </tr>
+    </thead>
+    <tbody class="tbody_show_data_res">
+
+    </tbody>
+</table>
+<table border="4" class="container_confirm_premise">
+    <caption>TIỀN CĂN BÊNH NHÂN
+        <div class="icon_closes">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+    </caption>
+    <thead>
+        <tr>
+            <th>CODE</th>
+            <th style="
+    width: 100%;
+    text-align: center;
+">TÊN BÊNH</th>
+        </tr>
+    </thead>
+    <tbody class="tbody_show_data_premise">
+
+    </tbody>
+</table>
+<div style="display:none" class="arr_medical arr_pre arr_medicine_pre">
+    <div class="icon_closes icon_closes_pre">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="table-responsive text-nowrap swapper_arr_medical">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tên thuốc</th>
+                    <th>Số lượng</th>
+                    <th>Số Lần/ngày</th>
+                    <th>Số ngày</th>
+                    <th>Tổng số lượng</th>
+                    <th>Chỉ định</th>
+                    <th>Tổng tiền</th>
+                </tr>
+            </thead>
+            <tbody class="tbody_add_medical tbody_show_medical_pre">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" value="{{pat_id_pdf}}" class="pat_id_hidden">
+<input type="hidden" value="{{pi_id}}" class="pi_id_hidden">
+<form class="form">
+    <input id="hidden_med_id" type="hidden" name="med_id" value="">
+</form>
+<form class="form_delete_all_medical" name={{#each result}}{{this.pat_id}}{{/each}}>
+    <input id="hidden_patID" type="hidden" pat_id={{#each result}}{{this.pat_id}}{{/each}} name="patID">
+</form>
+<script>
+
+    const pat_id_hidden = document.querySelector('.pat_id_hidden')
+    const pi_id_hidden = document.querySelector('.pi_id_hidden')
+    const show_search = document.querySelector('.show_search')
+    const value_subclinical = document.querySelector('.value_subclinical')
+    const adđ_arr_sub = document.querySelector('.adđ_arr_sub')
+    const url = 'http://localhost:3000/json/list_subclinical';
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (results1) {
+            value_subclinical.onkeyup = (e) => {
+                const inputData = e.target.value;
+                const arrS = results1.filter((results) => {
+                    const dataF = (results.sub_name.toLocaleLowerCase())
+                    if (!inputData) {
+                        return;
+                    }
+                    if (dataF.includes(inputData)) {
+                        return dataF
+                    }
+                })
+                const hbs = arrS.map(function (arr) {
+                    return `
+                            <li idSub=${arr.sub_id} class="item_add_subclinical"><a style="cursor: pointer;">${arr.sub_name}</a></li>
+                            `
+                })
+                show_search.innerHTML = hbs.join('')
+                const item_add_subclinical = document.querySelectorAll('.item_add_subclinical')
+
+                item_add_subclinical.forEach(item => {
+                    item.onclick = () => {
+                        item.classList.toggle('actived')
+                    }
+                })
+                adđ_arr_sub.onclick = () => {
+                    let arr = []
+                    item_add_subclinical.forEach(item => {
+                        if (item.classList.contains('actived')) {
+                            const id = item.getAttribute('idSub')
+                            arr.push(id)
+                        }
+                    })
+                    if (arr.length > 0) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', `/add_subclinical`);
+                        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        xhr.onload = function () {
+                            if (xhr.status === 200) {
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 2000);
+                                notification.message('Thêm chỉ định thành công', 'green', 'check')
+                            } else if (xhr.status === 401) {
+                                notification.message('bệnh nhân chưa đóng tiền sổ khám bệnh', 'red', 'exclamation')
+                            } else if (xhr.status === 404) {
+                                notification.message('Tiền cận đã tồn tại', 'red', 'exclamation')
+                            }
+                        }
+                        xhr.send(JSON.stringify({
+                            sub_id: arr,
+                            pat_id: pat_id_hidden.value,
+                            pi_id: pi_id_hidden.value
+                        }))
+                    } else {
+                        notification.message('Chưa chọn tiền cận', 'red', 'exclamation')
+                    }
+                }
+            }
+        })
+    //  const form = document.querySelector('.form');
+    const re_examination = document.querySelector('.re_examination')
+    re_examination.onclick = () => {
+        const pat_id = re_examination.getAttribute('pat_id')
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', `/re_examination/${pat_id}`);
+        const formData = new FormData(document.querySelector('.form'));
+        xhr.onload = function () {
+            const response = JSON.parse(xhr.responseText);
+            if (xhr.status === 200) {
+                location.reload()
+            } else if (xhr.status === 404) {
+                notification.message(response.data, 'red', 'exclamation')
+            }
+        };
+        xhr.send(formData);
+    }
+
+    const print_pdf_detail_medicine = document.querySelectorAll('.print_pdf_detail_medicine')
+
+    print_pdf_detail_medicine.forEach(item => {
+        item.onclick = (e) => {
+            e.preventDefault();
+            const pat_id = pat_id_hidden.value
+            const pre_id = item.getAttribute('pre_id')
+            window.location = `/download/prescription/${pat_id}/${pre_id}`
+        }
+    })
+    const download_prescription = document.querySelector('.download_prescription')
+    const tbody_add_medical_check = document.querySelector('.tbody_add_medical_check')
+    const med_name_list_check = document.querySelectorAll('.med_name_list_check')
+    download_prescription.onclick = (e) => {
+        if (med_name_list_check[0].innerText.trim() === "") {
+            e.preventDefault()
+        }
+    }
+
+    const delete_pre = document.querySelectorAll('.delete_pre')
+    delete_pre.forEach(item => {
+        item.onclick = () => {
+            const pre_id = item.getAttribute('pre_id')
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/delete_pre/${pre_id}`);
+            const formData = new FormData(document.querySelector('.form'));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                        notification.message('Xóa thành công', 'green', 'check')
+                }
+            };
+            xhr.send(formData);
+        }
+    })
+    const delete_sub_item = document.querySelectorAll('.delete_sub_item')
+    delete_sub_item.forEach(item => {
+        item.onclick = () => {
+            const dps_id = item.getAttribute('dps_id')
+            const res_id = item.getAttribute('res_id')
+           if(!res_id){
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', `/delete_sub_item_new/${dps_id}`);
+                const formData = new FormData(document.querySelector('.form'));
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                        notification.message('Xóa thành công', 'green', 'check')
+                    }
+                };
+                xhr.send(formData);
+           }else{
+            notification.message('Xóa không thành công', 'red', 'exclamation')
+           }
+        }
+    })
+
+
+    const toggle_pre_show = document.querySelector('.toggle_pre_show')
+    const toggle_pre_none = document.querySelector('.toggle_pre_none')
+    const arr_pre = document.querySelector('.arr_pre')
+
+
+    const show_arr_medicine = document.querySelectorAll('.show_arr_medicine')
+    const arr_medicine_pre = document.querySelector('.arr_medicine_pre')
+    const icon_closes_pre = document.querySelector('.icon_closes_pre')
+    const tbody_show_medical_pre = document.querySelector('.tbody_show_medical_pre')
+    show_arr_medicine.forEach(item => {
+        item.onclick = () => {
+            const pre_id = item.getAttribute('pre_id')
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/show_arr_medicial_pre/${pre_id}`);
+            let formData = new FormData(document.querySelector('.form'));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    const arr_medicine_pre = response.result
+                    let html = ``
+                    arr_medicine_pre.forEach(item => {
+                        html += ` <tr style="color: #000;">
+                    <td>${item.med_name}</td>
+                    <td><a style="color:#000" href="">${item.quantity_time}</a></td>
+                    <td>${item.quantity_day}</td>
+                    <td>${item.quantity_day_use}</td>
+                    <td>${item.total_quantity}</td>
+                    <td>${item.use_only}</td>
+                    <td>${item.total_price}</td>
+                </tr>
+                        `
+                    })
+                    tbody_show_medical_pre.innerHTML = html
+                }
+
+            };
+            xhr.send(formData);
+
+            arr_medicine_pre.classList.add('active')
+        }
+    })
+    icon_closes_pre.onclick = () => {
+        arr_medicine_pre.classList.remove('active')
+    }
+
+
+
+    // toggle_pre_show.onclick = () => {
+    //     arr_pre.classList.add('active')
+    //     toggle_pre_show.style.display = 'none'
+    //     toggle_pre_none.classList.add('active')
+    // }
+    // toggle_pre_none.onclick = () => {
+    //     arr_pre.classList.remove('active')
+    //      toggle_pre_show.style.display = 'block'
+    //     toggle_pre_none.classList.remove('active')
+    //  }
+
+
+
+    const swapper_subclinical_re = document.querySelectorAll('.swapper_subclinical_re')
+    const deleted = document.querySelector('.deleted')
+    const icon_close = document.querySelector('.icon_close')
+    const container_confirm = document.querySelector('.container_confirm')
+    const tbody_show_data_res = document.querySelector('.tbody_show_data_res')
+    const deleted_item = document.querySelectorAll('.deleted_item')
+    if (swapper_subclinical_re) {
+        swapper_subclinical_re.forEach(item => {
+            const data = item.getAttribute('name')
+            if (data == '') {
+                item.innerHTML = 'Chưa khám'
+            } else {
+                item.innerHTML = 'Đã kết quả'
+                item.onclick = () => {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', `/show_detail_sub/${data}`);
+                    const formData = new FormData(document.querySelector('.form'));
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            const response = JSON.parse(xhr.responseText);
+                            const { res_id,
+                                bt_blood,
+                                bt_red_blood_cells,
+                                bt_white_blood_cells,
+                                create_date,
+                                dps_id,
+                                re_name,
+                                res_detail,
+                                sub_id,
+                                sub_name,
+                                sub_price,
+                                date } = response.result[0]
+
+
+                            const html = `
+                                <tr>
+                                    <td>${sub_name}</td>
+                                    <td>${res_detail}</td>
+                                    <td>${date}</td>
+                                </tr> `
+                            const htm = `
+                                <tr>
+                                    <td>Hg</td>
+                                    <td>${bt_blood}</td>
+                                    <td>${date}</td>
+                                <td>
+                                <tr>
+                                    <td>Hồng cầu</td>
+                                    <td>${bt_red_blood_cells}</td>
+                                    <td>${date}</td>
+                                <td>
+                                <tr>
+                                    <td>Bach cầu</td>
+                                    <td>${bt_white_blood_cells}</td>
+                                    <td>${date}</td>
+                                <td>
+                            `
+                            if (sub_id == 2) {
+                                tbody_show_data_res.innerHTML = htm
+                            } else {
+                                tbody_show_data_res.innerHTML = html
+                            }
+                            container_confirm.classList.add('active')
+                            icon_close.onclick = () => {
+                                container_confirm.classList.remove('active')
+                            }
+                        }
+                    };
+                    xhr.send(formData);
+                }
+
+            }
+
+        })
+        deleted_item.forEach(item => {
+            const data = item.getAttribute('name')
+            if (data == '') {
+                item.classList.add('btn-danger')
+            } else {
+                item.type = 'button'
+                item.classList.add('btn-secondary')
+            }
+
+        })
+    }
+
+
+
+
+
+
+
+
+    const swapper_subclinical = document.querySelector('.swapper_subclinical');
+    const showListPremise = document.querySelectorAll('.showListPremise')
+    showListPremise.forEach(itemPremise => {
+        itemPremise.onclick = (e) => {
+            const idPat = itemPremise.getAttribute('idPat')
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/show_detail_patient_sub/${idPat}`);
+            const formData = new FormData(document.querySelector('.form'));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    const objListPremise = response.listPremise
+                    let html = ``
+                    objListPremise.forEach(item => {
+                        html += `
+                        <tr>
+                            <input type="hidden" name="subclinical_id" id="subclinical_id" value=${item.sub_id}>
+                                <input type="hidden" name="pat_id" id="pat_id" value=${item.pat_id}>
+                                    <td style="padding:.5rem 0;">S00${item.sub_id}</td>
+                                    <td style="padding:.5rem 0;">${item.sub_name}</td>
+                                    <td style="padding:.5rem 0;">${item.sub_price} vnd</td>
+                                    <td style="padding:.5rem 0;" class="swapper_subclinical_re" name=${item.res_id}>Chưa thanh toán</td>
+                                    <td style="padding:.5rem 0;"><input pat_id=${item.pat_id} sub_id=${item.sub_id} 
+                                        name=${item.res_id} type="checkbox" class="delete_item_sub" id="">
+                                    </td>
+                                </tr>
+                        `
+                    })
+                    swapper_subclinical.innerHTML = html
+                }
+
+            };
+            xhr.send(formData);
+        }
+
+    })
+
+
+
+    const search_medical_wrapper = document.querySelector('.search_medical')
+    const show_premise = document.querySelector('.show_premise')
+    const icon_closes = document.querySelector('.icon_closes')
+    const container_confirm_premise = document.querySelector('.container_confirm_premise')
+    const tbody_show_data_premise = document.querySelector('.tbody_show_data_premise')
+    show_premise.addEventListener('click', function (e) {
+        e.preventDefault();
+        const pat_id = show_premise.getAttribute('pat_id');
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', `/show_premise/${pat_id}`);
+        const formData = new FormData(document.querySelector('.form'));
+        let html = ` `
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                response.premise.forEach((item) => {
+                    html += `<tr>
+                        <td>${item.pre_code}</td>
+                        <td>${item.pre_name}</td>
+                    </tr>`
+                })
+                tbody_show_data_premise.innerHTML = html
+                container_confirm_premise.classList.add('active')
+                icon_closes.onclick = () => {
+                    container_confirm_premise.classList.remove('active')
+                }
+            }
+        };
+        xhr.send(formData);
+    })
+
+
+
+
+
+
+
+
+    const form_delete_all_medical = document.querySelector('.form_delete_all_medical')
+    const delete_all_medical = document.querySelector('.delete_all_medical')
+    const hidden_patID = document.getElementById('hidden_pat')
+    delete_all_medical.addEventListener('click', function (event) {
+        event.preventDefault();
+        const check = confirm("Bạn có chắc chắn muốn xóa danh sách thuốc?");
+        if (check == true) {
+            const pat_id = form_delete_all_medical.getAttribute('name')
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/delete_all_medical_item/${pat_id}`);
+            const formData = new FormData(document.querySelector('.form'));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                        notification.message('Xóa thành công', 'green', 'check')
+                }
+            };
+            xhr.send(formData);
+        } else {
+        }
+    });
+
+
+
+    const med_name_value = document.getElementById('med_name')
+    const med_name = document.getElementById('med_name')
+    const quantity_time = document.getElementById('quantity_time')
+    const quantity_day = document.getElementById('quantity_day')
+    const quantity_day_use = document.getElementById('quantity_day_use')
+    const hidden_med_id = document.getElementById("hidden_med_id");
+    const deleteItemOnArrMed = document.querySelectorAll('.deleteItemOnArrMed')
+    for (let item = 0; item < deleteItemOnArrMed.length; item++) {
+        deleteItemOnArrMed[item].addEventListener('click', function (event) {
+            event.preventDefault();
+            const med_id = deleteItemOnArrMed[item].getAttribute('name')
+            const total_quantity = deleteItemOnArrMed[item].getAttribute('total_quantity')
+            const u_id = deleteItemOnArrMed[item].getAttribute('u_id')
+            hidden_med_id.value = med_id
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/delete_medical_item/${med_id}/${total_quantity}/${u_id}`);
+            let formData = new FormData(document.querySelector('.form'));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                        notification.message('Xóa thành công', 'green', 'check')
+                }
+            };
+            xhr.send(formData);
+        });
+    }
+
+    const med_name_list = document.querySelectorAll('.med_name_list')
+    for (let item = 0; item < med_name_list.length; item++) {
+        med_name_list[item].addEventListener('click', function (e) {
+
+            const quantity_day_useNew = med_name_list[item].getAttribute('quantity_day_use')
+            const use_onlyNew = med_name_list[item].getAttribute('use_only')
+            const quantity_timeNew = med_name_list[item].getAttribute('quantity_time')
+            const med_nameNew = med_name_list[item].getAttribute('med_name')
+            const quantity_dayNew = med_name_list[item].getAttribute('quantity_day')
+            const total_quantityNew = med_name_list[item].getAttribute('total_quantity')
+            const med_id = med_name_list[item].getAttribute('med_id')
+
+
+            //cập nhật lại kho khi người dùng có ý định sửa lại số lượng toa thuốc
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/update_store_medical_item/${+med_id}/${+total_quantityNew}`);
+            const formData = new FormData(document.querySelector('.form'));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const url_medical = 'http://localhost:3000/json/list_medicine'
+                    const update_uNit = document.querySelector('.update_uNit')
+                    med_name_list[item].parentNode.style.display = 'none'
+                    fetch(url_medical)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (results1) {
+                            const hbs = results1.map((obj) => {
+                                return `
+                    <li><a name='${obj.med_name}' u_name=${obj.u_name} QuantityPerPack=${obj.QuantityPerPack} quantity=${obj.RemainingQuantity} idUnit=${obj.u_id} class="choose_medical" >${obj.med_name}</a></li>`
+                            })
+                            search_medical_wrapper.innerHTML = hbs.join('')
+                            search_medical_wrapper.style.display = 'none';
+
+                            const choose_medical = document.querySelectorAll('.choose_medical')
+                            const stop = false
+                            choose_medical.forEach(item => {
+                                function handleItemClick(item) {
+                                    const childNodes = item.childNodes;
+                                    childNodes.forEach(childNode => {
+                                        const idNew = childNode.getAttribute('idUnit')
+                                        const med_nameeNew = childNode.getAttribute('name')
+                                        const U_nameNew = childNode.getAttribute('u_name')
+                                        const quantityNew = childNode.getAttribute('quantity')
+                                        const QuantityPerPackNew = childNode.getAttribute('QuantityPerPack')
+                                        const checkQuantity = document.querySelector('.checkQuantity')
+                                        quantity_time.addEventListener("input", function () {
+                                            const enteredValue = parseFloat(this.value);
+                                            if (isNaN(enteredValue) || enteredValue > quantityNew) {
+                                                this.value = "";
+                                            }
+                                            if (+idNew !== 38) {
+                                                const checklevel2 = (quantityNew / enteredValue)
+                                                if (checklevel2 < quantity_day.value) {
+                                                    quantity_day.value = ''
+                                                    quantity_day_use.value = ''
+                                                }
+                                                const checklevel3 = quantityNew / (quantity_time.value * quantity_day.value)
+                                                if (checklevel3 < quantity_day_use.value) {
+                                                    quantity_day_use.value = ''
+                                                }
+
+                                            }
+                                        });
+                                        med_name.value = med_nameeNew
+                                        med_name.onkeydown = (e) => {
+                                            e.preventDefault();
+                                        }
+                                        quantity_time.value = quantity_timeNew
+                                        use_only.value = use_onlyNew
+                                        quantity_day_use.value = quantity_day_useNew
+                                        quantity_day.value = quantity_dayNew
+                                        const submitHandleDeleteAndUpdate = document.getElementById('submitHandleDeleteAndUpdate')
+                                        submitHandleDeleteAndUpdate.value = 'Sửa'
+                                        update_uNit.innerText = '';
+                                        if (idNew === '38') {
+                                            checkQuantity.innerText = `Số lượng còn lại là: ${quantityNew} ${U_nameNew}`;
+                                            update_uNit.innerText = `Số Lượng(${U_nameNew}) / toa thuốc`;
+                                            quantity_day.removeAttribute("disabled");
+                                            quantity_day_use.removeAttribute("disabled");
+                                        } else {
+                                            //const unit = quantityNew / QuantityPerPackNew;
+                                            checkQuantity.innerText = `Số lượng còn lại là: ${quantityNew} ${U_nameNew}`;
+                                            update_uNit.innerText = `Số Lượng(${U_nameNew}) / Lần:`;
+                                            quantity_day.setAttribute("disabled", "disabled")
+                                            quantity_day_use.setAttribute("disabled", "disabled")
+                                            quantity_time.onblur = () => {
+                                                if (quantity_time.value == '') {
+                                                    quantity_day.setAttribute("disabled", "disabled")
+                                                } else {
+                                                    quantity_day.removeAttribute("disabled")
+                                                    quantity_day_use.setAttribute("disabled", "disabled")
+                                                    quantity_day.addEventListener("input", function () {
+                                                        const checkValueDay = quantity_time.value * quantity_day.value
+                                                        const enteredValue = parseFloat(quantity_day.value); // Chuyển đổi giá trị nhập vào thành số
+                                                        const valueCheckQuantity = document.getElementById('quantity_time').getAttribute('ml')
+                                                        const converInt = +valueCheckQuantity
+                                                        if (isNaN(enteredValue) || checkValueDay > converInt) {
+                                                            quantity_day.value = ""; // Xóa giá trị nếu nó là NaN hoặc lớn hơn maxValue
+                                                        } else {
+                                                            quantity_day.onblur = () => {
+                                                                if (quantity_day.value !== '') {
+                                                                    quantity_day_use.removeAttribute("disabled")
+                                                                    quantity_day_use.addEventListener("input", function () {
+                                                                        const checkValueDayUse = quantity_time.value * quantity_day.value * quantity_day_use.value
+                                                                        const enteredValue = parseFloat(checkValueDayUse.value); // Chuyển đổi giá trị nhập vào thành số
+                                                                        const valueCheckQuantity = document.getElementById('quantity_time').getAttribute('ml')
+                                                                        const converInt = +valueCheckQuantity
+                                                                        if (checkValueDayUse > converInt) {
+                                                                            quantity_day_use.value = ""; // Xóa giá trị nếu nó là NaN hoặc lớn hơn maxValue
+                                                                        }
+                                                                    })
+
+                                                                } else {
+                                                                    quantity_day_use.setAttribute("disabled", "disabled")
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            }
+
+                                        }
+                                        document.getElementById('quantity_time').setAttribute("ml", quantityNew);
+                                    })
+                                }
+                                // Sau đó, khi bạn muốn kích hoạt xử lý cho một mục cụ thể, gọi hàm handleItemClick(item) với item tương ứng.
+                                if (med_nameNew == item.getAttribute('name')) {
+                                    item.parentNode.dispatchEvent(new MouseEvent('click'), {
+                                        bubbles: true,
+                                        cancelable: true,
+                                        view: window
+                                    });
+                                    handleItemClick(item.parentNode);
+                                }
+                            })
+                        })
+                }
+            };
+            xhr.send(formData);
+
+
+        });
+    }
+
+
+
+    const detail_medical_form = document.querySelector('.detail_medical')
+
+
+
+
+    const use_only = document.getElementById('use_only')
+    const pre_id = document.getElementById('pre_id')
+    const idPatss = document.getElementById('idPatss')
+    const tbody_add_medical = document.querySelector('.tbody_add_medical')
+    detail_medical_form.addEventListener("submit", function (e) {
+        // Gửi yêu cầu AJAX đến máy chủ
+        e.preventDefault()
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/import_medical_item");
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                med_name.value = ''
+                quantity_time.value = ''
+                quantity_day.value = ''
+                quantity_day_use.value = ''
+                use_only.value = ''
+                idPatss.value = ''
+                pre_id.value = ''
+
+                setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                        notification.message('Thêm thành công', 'green', 'check')
+            }
+        };
+        xhr.send(JSON.stringify({
+            med_name: med_name.value,
+            idPatss: idPatss.value,
+            quantity_time: quantity_time.value,
+            quantity_day: quantity_day.value,
+            quantity_day_use: quantity_day_use.value,
+            use_only: use_only.value,
+            pre_id: pre_id.value,
+        }));
+    })
+    window.onload = () => {
+        if (tbody_add_medical.children.length = 1) {
+            const tdElement = document.querySelector('.tdElement')
+            if (tdElement.textContent.trim() === '') {
+                tbody_add_medical.style.display = 'none'
+            }
+        }
+    }
+    const subclinical_handle_delete_item = document.querySelectorAll('.subclinical_handle_delete_item')
+    const subclinical_id = document.querySelectorAll('#subclinical_id')
+    const pat_id = document.querySelectorAll('#pat_id')
+
+    for (let i = 0; i < subclinical_handle_delete_item.length; i++) {
+        for (let j = 0; j < subclinical_id.length; j++) {
+            for (let z = 0; z < pat_id.length; z++) {
+                subclinical_handle_delete_item[i].addEventListener("submit", function (e) {
+                    e.preventDefault()
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/delete_subclinical_items");
+                    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response) {
+
+                                setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                        notification.message('Xóa thành công', 'green', 'check')
+                            }
+                        }
+                    };
+                    xhr.send(JSON.stringify({
+                        subclinical_id: subclinical_id[i].value,
+                        pat_id: pat_id[i].value
+                    }));
+                })
+                break;
+            }
+            break;
+        }
+    }
+
+
+
+
+    const swapper_post_exa = document.querySelector('.swapper_post_exa')
+    const examination_left = document.querySelector('.examination_left')
+    const examination_right = document.querySelector('.examination_right')
+    swapper_post_exa.addEventListener("submit", function (e) {
+        e.preventDefault(); // Ngăn chặn refresh trang
+
+        // Gửi yêu cầu AJAX đến máy chủ
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/add_examination");
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                setTimeout(() => {
+                            location.reload();
+                        }, 1500);
+                        notification.message('Thêm thành công', 'green', 'check')
+            }
+        };
+        xhr.send(JSON.stringify({
+            vascular: document.getElementById("vascular").value,
+            temperature: document.getElementById("temperature").value,
+            breathing: document.getElementById("breathing").value,
+            blood_pressure: document.getElementById("blood_pressure").value,
+            height: document.getElementById("height").value,
+            weight: document.getElementById("weight").value,
+            symptom: document.getElementById("symptom").value,
+            datepicker: document.getElementById("datepicker").value,
+            gender2: document.getElementById("gender2").value
+        }));
+    });
+
+
+
+    const url_medical = 'http://localhost:3000/json/list_medicine'
+    const update_uNit = document.querySelector('.update_uNit')
+    fetch(url_medical)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (results1) {
+            med_name_value.onkeyup = (e) => {
+                const inputData = e.target.value;
+                const arrS = results1.filter((results) => {
+                    const dataF = (results.med_name.toLocaleLowerCase())
+                    if (!inputData) {
+                        return;
+                    }
+                    if (dataF.includes(inputData)) {
+                        return dataF
+                    }
+                })
+                const hbs = arrS.map(function (arr) {
+                    console.log(arr)
+                    return `
+                        <li><a name='${arr.med_name}' unit_name=${arr.u_name} QuantityPerPack=${arr.QuantityPerPack} quantity=${arr.RemainingQuantity} idUnit=${arr.u_id} class="choose_medical" >${arr.med_name}</a></li>
+                    `
+                })
+                search_medical_wrapper.innerHTML = hbs.join('')
+
+                const choose_medical = document.querySelectorAll('.choose_medical')
+                choose_medical.forEach(item => {
+                    item.onclick = (e) => {
+                        med_name_value.value = item.getAttribute('name')
+                        const id = item.getAttribute('idUnit')
+                        const unit_name = item.getAttribute('unit_name')
+                        const quantity = item.getAttribute('quantity')
+                        const QuantityPerPack = item.getAttribute('QuantityPerPack')
+                        const checkQuantity = document.querySelector('.checkQuantity')
+
+                        document.getElementById('quantity_time').addEventListener("input", function () {
+
+                            const enteredValue = parseFloat(this.value); // Chuyển đổi giá trị nhập vào thành số
+                            if (isNaN(enteredValue) || enteredValue > quantity) {
+                                this.value = ""; // Xóa giá trị nếu nó là NaN hoặc lớn hơn maxValue
+                            }
+                        });
+
+                        update_uNit.innerText = ''
+                        if (id === '38') {
+                            checkQuantity.innerText = `Số lượng còn lại là: ${quantity} ${unit_name}`
+                            update_uNit.innerText = `Số Lượng(${unit_name}) / toa thuốc`
+                            quantity_day.removeAttribute("disabled")
+                            quantity_day_use.removeAttribute("disabled")
+                        } else {
+                            const unit = quantity / QuantityPerPack
+                            //checkQuantity.innerText = `Số lượng còn lại là: ${quantity} viên / ${unit} vỉ `
+                            checkQuantity.innerText = `Số lượng còn lại là: ${quantity} ${unit_name} `
+                            update_uNit.innerText = `Số Lượng(${unit_name}) / Lần:`
+                            quantity_time.addEventListener("input", function () {
+                                const value = quantity_time.value;
+                                if (/[a-zA-Z]/.test(value)) {
+                                    quantity_time.value = "";
+                                }
+                            });
+                            quantity_time.onblur = () => {
+                                if (quantity_time.value == '') {
+                                    quantity_day.setAttribute("disabled", "disabled")
+                                } else {
+                                    quantity_day.removeAttribute("disabled")
+                                    quantity_day.addEventListener("input", function () {
+                                        const checkValueDay = quantity_time.value * quantity_day.value
+                                        const enteredValue = parseFloat(quantity_day.value); // Chuyển đổi giá trị nhập vào thành số
+                                        const valueCheckQuantity = document.getElementById('quantity_time').getAttribute('ml')
+                                        const converInt = +valueCheckQuantity
+                                        if (isNaN(enteredValue) || checkValueDay > converInt) {
+                                            quantity_day.value = ""; // Xóa giá trị nếu nó là NaN hoặc lớn hơn maxValue
+                                        } else {
+                                            quantity_day.onblur = () => {
+                                                if (quantity_day.value !== '') {
+                                                    quantity_day_use.removeAttribute("disabled")
+                                                    quantity_day_use.addEventListener("input", function () {
+                                                        const checkValueDayUse = quantity_time.value * quantity_day.value * quantity_day_use.value
+                                                        const enteredValue = parseFloat(checkValueDayUse.value); // Chuyển đổi giá trị nhập vào thành số
+                                                        const valueCheckQuantity = document.getElementById('quantity_time').getAttribute('ml')
+                                                        const converInt = +valueCheckQuantity
+                                                        if (checkValueDayUse > converInt) {
+                                                            quantity_day_use.value = ""; // Xóa giá trị nếu nó là NaN hoặc lớn hơn maxValue
+                                                        }
+                                                    })
+
+                                                } else {
+                                                    quantity_day_use.setAttribute("disabled", "disabled")
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                        document.getElementById('quantity_time').setAttribute("ml", quantity)
+                        search_medical_wrapper.style.display = 'none'
+                    }
+                })
+
+            }
+        })
+
+
+
+
+
+
+</script>
+<style>
+    .actived {
+        background-color: #335fc4 !important;
+    }
+
+    #app .info_rightt {
+        background-color: #c4e0fd;
+        margin: 2rem 0;
+        padding: 1rem;
+    }
+
+    #app .info_rightt .subclinical {
+        position: relative;
+    }
+
+    #app .info_rightt .subclinical form .submit {
+        margin: 0 1rem 0 0;
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    #app .info_rightt .subclinical form .inValue {
+        height: 3rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+    }
+
+    #app .info_rightt .subclinical .show_search {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #62abf5;
+    }
+
+    #app .info_rightt .subclinical .show_search li {
+        padding: .5rem;
+    }
+
+    #app .info_rightt .subclinical .show_search li a {
+        color: #fff;
+        font-size: 1.1rem;
+        display: block;
+        text-align: center;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #app .info_rightt .subclinical .show_search li:hover {
+        background-color: #7bbcfc;
+    }
+
+    #app .info_rightt .swapper_arr_subclinical {
+        height: 12rem;
+    }
+
+    #app .info_rightt .swapper_arr_subclinical table thead tr {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #335fc4;
+    }
+
+    #app .info_rightt .swapper_arr_subclinical table thead tr th {
+        text-align: center;
+    }
+
+    #app .info_rightt .swapper_arr_subclinical table .swapper_subclinical tr {
+        font-size: 1.1rem;
+    }
+
+    #app .info_rightt .swapper_arr_subclinical table .swapper_subclinical tr td,
+    #app .info_rightt .swapper_arr_subclinical table .swapper_subclinical tr th {
+        font-size: 1.1rem;
+        text-align: center;
+        line-height: 3rem;
+        font-size: 1.5rem;
+
+
+    }
+
+    .arr_medicine_pre.active {
+        display: block !important;
+    }
+
+    #app .examination_container {
+        max-height: 80rem;
+        overflow-y: auto;
+    }
+
+    .arr.active {
+        display: block !important;
+    }
+
+    .toggle_pre_none {
+        display: none !important;
+    }
+
+    .med_name_list {
+        position: relative;
+    }
+
+    .med_name_list:hover::before {
+        content: "Bạn muốn cập nhật lại thuốc?";
+        display: block;
+        position: absolute;
+        background-color: #626060e1;
+        padding: .5rem;
+        color: #fff;
+        z-index: 1000;
+        top: 70%;
+        left: 50%;
+    }
+
+    caption {
+        caption-side: top;
+        FONT-SIZE: 1.5rem;
+        display: block;
+        text-align: center;
+        font-weight: 600;
+        color: #000
+    }
+
+    .swapper_subclinical_re {
+        cursor: pointer;
+    }
+
+        {
+            {
+            !-- #app {
+                position: relative;
+            }
+
+            #app::after {
+                position: absolute;
+                content: ' ';
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-color: #00000083;
+                z-index: 100;
+            }
+
+            --
+        }
+    }
+
+
+    .container_confirm,
+    .container_confirm_premise {
+        display: none;
+        background-color: #fff;
+        position: absolute;
+        width: 28%;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 101;
+        padding: 2rem;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+
+
+    .active {
+        display: inline-block !important;
+    }
+
+    .icon_close,
+    .icon_closes {
+        cursor: pointer;
+        position: absolute;
+        top: 1px;
+        right: 15px;
+        font-size: 2rem;
+    }
+
+    .container_confirm thead tr th,
+    .container_confirm_premise tr th {
+        padding: 0 1.5rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .container_confirm tbody tr td,
+    .container_confirm_premise tr td {
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 400;
+        padding-right: 1rem;
+    }
+
+    .table-confirm {
+        border: none;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+
+
+    .table-confirm thead th {
+        background-color: #f8f9fa;
+        border: none;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .table-confirm tbody td {
+        background-color: #ffffff;
+        border: none;
+        text-align: center;
+    }
+
+    .table-striped tbody tr:nth-child(odd) td,
+    .table-striped tbody tr:nth-child(odd) th {
+        background-color: #93c2f1;
+    }
+
+    .gj-datepicker-bootstrap [role=right-icon] button .gj-icon,
+    .gj-datepicker-bootstrap [role=right-icon] button .material-icons {
+        position: absolute;
+        font-size: 21px;
+        top: 15%;
+        left: 20%;
+        color: #335fc4;
+    }
+
+    .arrowHidden {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    #app .header_container {
+        width: 100%;
+    }
+
+    #app .header_container #login_hidden {
+        display: none !important;
+    }
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+</style>

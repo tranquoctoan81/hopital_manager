@@ -1,0 +1,448 @@
+<div class="add_info_container">
+    <div class="add_info_header" style="
+    padding-left: 4rem;
+    margin-bottom: 2rem;
+">
+        <h1>Đóng tiền tạo sổ khám bệnh</h1>
+        <div>
+            <p class="place">Khu Vực: <span>Đóng tiền</span></p>
+            <div class="place">Thu ngân: <span>{{doctorName}}</span></div>
+        </div>
+        <div class="list_patient">
+            <div>
+                <div id="listPatient" class="card-body">
+                    <div class="table-responsive">
+                        <table id="datatable" class="table   data-table" style="width: 100%">
+                            <thead style="background-color:#335fc4" class="thead-inverse">
+                                <tr style="font-size:1.4rem;color:#fff;">
+                                    <th>STT</th>
+                                    <th>Mã bệnh nhân</th>
+                                    <th>Tên Bệnh Nhân</th>
+                                    <th>Tổng tiền</th>
+                                    <th>In phiếu đống tiền</th>
+                                    <th>Tình trạng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each result}}
+                                <tr>
+                                    <th style="text-align:center;font-size: 1.5rem;" scope="row">{{sum @index 1}}</th>
+                                    <td>BN0{{this.pat_id}}</td>
+                                    <td style="text-align:left;cursor: pointer;" class="showListPremise">
+                                        {{this.pat_name}}</td>
+                                    <td style="text-align:center;">25.000 VND</td>
+                                    <td><a href="/download/{{this.pat_id}}">In phiếu</a></td>
+                                    <td>
+                                        <script>
+                                            if({{this.paid}} === 0){
+                                                document.write(`
+                                                <button type="button" class="btn btn-danger  Check_money_subclinical" pat_id={{this.pat_id}} paid={{this.paid}}>Đóng tiền</button>
+                                                `)
+                                            }else{
+                                                document.write(`
+                                                <button type="button" class="btn btn-primary  Check_money_subclinical" pat_id={{this.pat_id}} paid={{this.paid}}>Đã đóng tiền</button>
+                                                `)
+                                            }
+                                        </script>
+                                       
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<form class="form">
+    <input id="hidden_med_id" type="hidden" name="med_id" value="">
+</form>
+<script>
+
+    //const form = document.querySelector('.form');
+
+    const Check_money_subclinical = document.querySelectorAll('.Check_money_subclinical')
+    Check_money_subclinical.forEach(item => {
+        item.onclick = () => {
+            const pat_id = item.getAttribute('pat_id')
+            const paid = item.getAttribute('paid')
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/update_Check_money_book/${pat_id}/${paid}`);
+            let formData = new FormData(document.querySelector('.form'));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    setTimeout(() => {
+                        location.reload()
+                    },1500)
+                    notification.message('Cập nhật thành công', 'green', 'check')
+                }
+            };
+            xhr.send(formData);
+        }
+    })
+    const valueIdPatient = document.querySelector('.valueIdPatient')
+    const valueIdPi = document.querySelector('.valueIdPi')
+    const swapper_subclinical = document.querySelector('.swapper_subclinical');
+    const showListPremise = document.querySelectorAll('.showListPremise')
+    showListPremise.forEach(itemPremise => {
+        itemPremise.onclick = (e) => {
+            const id_pi = itemPremise.getAttribute('id_pi')
+            valueIdPi.value = id_pi
+            const pi_id = id_pi ? id_pi : 0
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/show_detail_patient_sub/${pi_id}`);
+            const formData = new FormData(document.querySelector('.form'));
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    const objListPremise = response.listPremise
+                    let html = ``
+                    objListPremise.forEach(item => {
+                        html += `
+                        <tr>
+                            <input type="hidden" name="subclinical_id" id="subclinical_id" value=${item.sub_id}>
+                                    <input type="hidden" name="pi_id" id="pi_id" value=${item.pi_id}>
+                                    <td style="padding:.5rem 0;">S00${item.sub_id}</td>
+                                    <td style="padding:.5rem 0;">${item.sub_name}</td>
+                                    <td style="padding:.5rem 0;">${item.sub_price} vnd</td>
+                                    <td style="padding:.5rem 0;" class="swapper_subclinical_re" name=${item.res_id}>Chưa thanh toán</td>
+                                    <td style="padding:.5rem 0;"><input pi_id=${item.pi_id} sub_id=${item.sub_id} 
+                                        name=${item.res_id} type="checkbox" class="delete_item_sub" id="">
+                                    </td>
+                                </tr>
+                        `
+                    })
+                    swapper_subclinical.innerHTML = html
+
+
+                    const delete_arr_sub = document.querySelector('.delete_arr_sub')
+                    const delete_item_sub = document.querySelectorAll('.delete_item_sub')
+                    let arr_check_sub = []
+                    let arr_para = []
+                    delete_arr_sub.onclick = () => {
+                        arr_check_sub.splice(0, arr_check_sub.length);
+                        const checkbox_sub_checked = document.querySelectorAll('.delete_item_sub:checked')
+                        checkbox_sub_checked.forEach((item_checked) => {
+                            const sub_id = item_checked.getAttribute('sub_id')
+                            const pi_id = item_checked.getAttribute('pi_id')
+                            arr_check_sub.push(sub_id)
+                            arr_para.push(pi_id)
+
+                        })
+                        if (arr_check_sub.length === 0) {
+                            alert('Chưa chọn tiền cận!!')
+                        } else {
+
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "/delete_arr_sub");
+                            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                            xhr.onload = function () {
+                                if (xhr.status === 200) {
+                                    const response = JSON.parse(xhr.responseText);
+                                    location.reload()
+                                }
+                            }
+                            xhr.send(JSON.stringify({
+                                arr_check_sub, pi_id: arr_para[0]
+                            }))
+                        }
+
+                    }
+                }
+
+            };
+            xhr.send(formData);
+        }
+
+    })
+
+
+
+
+
+
+
+
+    const nameHomie = document.getElementById('nameHomie')
+    const cccdHomie = document.getElementById('cccdHomie')
+    const phoneHomie = document.getElementById('phoneHomie')
+    const namePatient = document.getElementById('namePatient')
+    const address = document.getElementById('address')
+    const sex = document.getElementById('sex')
+    const date = document.getElementById('date')
+    const path_id = document.getElementById('path_id')
+    const color_random = document.querySelectorAll('.color_random')
+    const inphieu = document.querySelectorAll('.inphieu')
+    const pay = document.querySelectorAll('.pay')
+    color_random.forEach((item, i) => {
+        const paid = item.getAttribute('color')
+        if (paid == 1) {
+            item.classList.add('active')
+            item.onclick = (e) => {
+                e.preventDefault();
+            }
+            for (let a = 0; a < pay.length; a++) {
+                pay[i].innerText = ''
+                pay[i].innerText = 'Đã đóng tiền'
+            }
+        }
+    })
+    const thead = document.querySelector('.thead')
+    if (document.cookie.premise) {
+        console.log(123)
+    }
+    const search_hidden = document.querySelector('.search_hidden')
+    const value_premise = document.querySelector('.value_premise')
+
+
+
+</script>
+<style>
+    tr th,
+    tr td {
+        vertical-align: middle !important;
+    }
+
+    #app .info_right {
+        background-color: #c4e0fd;
+        margin: 2rem 0;
+        padding: 1rem;
+    }
+
+    #app .info_right .subclinical {
+        position: relative;
+    }
+
+    #app .info_right .subclinical form .submit {
+        margin: 0 1rem 0 0;
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    #app .info_right .subclinical form .inValue {
+        height: 3rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        border: 1px solid #335fc4;
+        outline: none;
+    }
+
+    #app .info_right .subclinical .show_search {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #62abf5;
+    }
+
+    #app .info_right .subclinical .show_search li {
+        padding: .5rem;
+    }
+
+    #app .info_right .subclinical .show_search li a {
+        color: #fff;
+        font-size: 1.1rem;
+        display: block;
+        text-align: center;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #app .info_right .subclinical .show_search li:hover {
+        background-color: #7bbcfc;
+    }
+
+    #app .info_right .swapper_arr_subclinical {
+        height: 12rem;
+    }
+
+    #app .info_right .swapper_arr_subclinical table thead tr {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #335fc4;
+    }
+
+    #app .info_right .swapper_arr_subclinical table thead tr th {
+        text-align: center;
+    }
+
+    #app .info_right .swapper_arr_subclinical table .swapper_subclinical tr {
+        font-size: 1.1rem;
+    }
+
+    #app .info_right .swapper_arr_subclinical table .swapper_subclinical tr td,
+    #app .info_right .swapper_arr_subclinical table .swapper_subclinical tr th {
+        font-size: 1.1rem;
+        text-align: center;
+        line-height: 3rem;
+        font-size: 1.5rem;
+
+
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu>a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover>a:after {
+        border-left-color: #fff;
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left>.dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+
+    div.dataTables_wrapper div.dataTables_length label {
+        text-align: left;
+        white-space: nowrap;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_info {
+        padding-top: 0.85em;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate .paginate_button {
+        cursor: pointer;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th,
+    .table>thead>tr>th {}
+
+    .color_random.active {
+        color: red;
+    }
+
+
+    .arrowHidden {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+    }
+
+    #app .header_container #login_hidden {
+        display: none !important;
+    }
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+
+
+    @media (min-width: 1025px) {
+        .h-custom {}
+    }
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+        top: 13px;
+    }
+
+    .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #a1c4fd;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))
+    }
+
+    .bg-indigo {
+        background-color: #4835d4;
+    }
+
+    @media (min-width: 992px) {
+        .card-registration-2 .bg-indigo {
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .card-registration-2 .bg-indigo {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+    }
+</style>

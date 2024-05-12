@@ -1,0 +1,159 @@
+$color-blue : #335fc4;
+
+.subclinical_container {
+    padding: 0 12rem;
+    color: $color-blue;
+
+    .subclinical_header {
+        h1 {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        div {
+            .place {
+                font-size: 1.5rem;
+                font-weight: 400;
+                margin: 0;
+
+                span {
+                    font-style: italic;
+                    font-weight: 500;
+                }
+            }
+
+            .name_doctor {}
+        }
+
+        .sub_container {
+            .sub_body {
+                display: flex;
+                justify-content: space-between;
+                margin: 0 12rem;
+
+                border-radius: 15px;
+                outline: none;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                margin-top: 3rem;
+
+                .sub_left {
+                    width: 60%;
+                    border-right: 1px solid #ccc;
+                    margin-right: 2rem;
+                    padding: 3rem;
+                    background-color: #e7f0f7;
+                    border-bottom-left-radius: 15px;
+                    border-top-left-radius: 15px;
+
+                    h3 {
+                        text-align: center;
+                        color: red;
+                        font-weight: 600;
+                        font-size: 2rem;
+                    }
+
+                    .sub_left_content {
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 1.3rem;
+                        margin-top: 2rem;
+
+                        .sub_info {
+
+                            .sub_detail {
+
+                                display: flex;
+
+                                .col_1 {
+                                    width: 30%;
+
+                                    .col-form-label {
+                                        color: #335fc4;
+                                        font-weight: 500;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        .sub_info:first-child {
+                            width: 70%;
+                        }
+
+                        .sub_info:nth-child(2) {
+                            width: 30%;
+
+                            .sub_detail {
+                                .col_1 {
+                                    width: 50%;
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+
+                .sub_right {
+                    width: 40%;
+                    padding: 3rem;
+
+                    h3 {
+                        text-align: center;
+                        color: red;
+                        font-weight: 600;
+                        font-size: 2rem;
+                    }
+
+                    .sub_right_content {
+                        font-size: 1.3rem;
+                        margin-top: 2rem;
+                    }
+                }
+
+            }
+
+            .sub_footer,
+            .sub_footer_2 {
+                margin: 5rem 12rem;
+
+                .sub_footer_detail {
+                    display: flex;
+                    flex-direction: row-reverse;
+
+                    table {
+                        width: 50%;
+                        font-size: 1.3rem;
+                        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+                        thead {
+                            background-color: #6986cf;
+                            color: #ffff;
+
+                        }
+
+                        tbody {
+                            tr {
+
+                                th,
+                                td {
+                                    input {
+                                        font-size: 1.3rem;
+
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+
+
+}

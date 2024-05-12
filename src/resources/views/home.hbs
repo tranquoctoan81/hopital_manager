@@ -1,0 +1,259 @@
+<div class="content_container">
+    <div class="swiper slides slides_container">
+        <div class="swiper-wrapper slide_wrapper">
+            <div class="swiper-slide img">
+                <img src="images/slide/slide1.jpg" alt="">
+            </div>
+            <div class="swiper-slide img">
+                <img src="images/slide/slide2.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <div id="dichvu" class="w-80 mt-3 mx-auto dichvuytenoibat" class="">
+        <div class="dichvu">
+            <div class="img">
+                <img src="images/logo_dichvu.png" alt="">
+            </div>
+            <h3 class="widget_title">DỊCH VỤ Y TẾ NỔI BẬT</h3>
+        </div>
+        <div class="textwidget">Của Chúng Tôi</div>
+    </div>
+    <div class="swiper dichvu_slide_wrapper">
+        <div class="swiper-wrapper dichvu_slides">
+            {{#each result }}
+            <div class="swiper-slide dichvu_slide" style="">
+                <div class="wrap_dvu">
+                    <a href="" class="images">
+                        <img src="http://localhost:3001/{{this.sub_img}}" alt="">
+                    </a>
+                </div>
+                <div class="textwidget">
+                    <h4><a style="font-size:2rem;color:#008080" href="" tabindex="0">{{this.sub_name}}</a></h4>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <input type="hidden" check="{{cssHeader}}" id="cssheader">
+    </div>
+    <div class="w-80 mt-3 mx-auto dichvuytenoibat" class="">
+        <div class="dichvu">
+            <div class="img">
+                <img src="images/logo_dichvu.png" alt="">
+            </div>
+            <h3 class="widget_title">SỐ LIỆU NỔI BẬT</h3>
+        </div>
+        <div class="textwidget">Của Chúng Tôi</div>
+    </div>
+    <div class="outstanding">
+        <div class="outstanding_left">
+            <div class="img">
+                <img src="images/icon_solieunoibat/PKNTHAB.jpg" alt="">
+            </div>
+            <div class="img_detail">
+                <h4 style="text-align: left;"><span
+                        style="color: #008080; font-family: arial, helvetica, sans-serif; font-size: 12pt;">Bền vững –
+                        Tiếp nối – Hài lòng</span></h4>
+                <p style="text-align: left;"><span
+                        style="color: #008080; font-family: arial, helvetica, sans-serif; font-size: 12pt;">Phòng khám
+                        nội tổng hợp An Bình</span></p>
+            </div>
+        </div>
+        <div class="outstanding_right">
+            <div class="images_dauphay">
+                <img src="images/dauphay.png" alt="">
+            </div>
+            <p class="detail">
+                <span style="font-family: arial, helvetica, sans-serif; font-size: 12pt;">Phòng khám Nội Tổng Hợp An
+                    Bình là nơi hội tụ đội ngũ bác sĩ giàu kinh nghiệm, nhiệt tình, tận tâm vì người bệnh,
+                    liên tục cập nhật những phương pháp điều trị hiện đại; luôn không ngừng phấn đấu để khẳng định sứ
+                    mệnh lớn lao mà mình hướng tới: Trở thành một trong những hệ thống y tế tư nhân hàng đầu Việt
+                    Nam.</span>
+            </p>
+            <div class="parameter">
+                <div class="parameter_top">
+                    <div class="parameter_item">
+                        <div class="logo">
+                            <i class="fa-solid fa-hospital"></i>
+                        </div>
+                        <div class="content">
+                            <div class="title">2023</div>
+                            <p class="content_time">Năm hoạt động</p>
+                        </div>
+                    </div>
+                    <div class="parameter_item">
+                        <div class="logo">
+                            <i class="fa-solid fa-user-doctor"></i>
+                        </div>
+                        <div class="content">
+                            <div class="title">{{#each total_doctors}}{{this.total_doctors}}{{/each}}</div>
+                            <p class="content_time">Chuyên gia</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="parameter_bottom">
+                    <div class="parameter_item">
+                        <div class="logo">
+                            <i class="fa-solid fa-hospital-user"></i>
+                        </div>
+                        <div class="content">
+                            <div class="title">{{#each total_patient}}{{this.total_patient}}{{/each}}</div>
+                            <p class="content_time">Số bệnh nhân</p>
+                        </div>
+                    </div>
+                    <div class="parameter_item">
+                        <div class="logo">
+                            <i class="fa-solid fa-code-branch"></i>
+                        </div>
+                        <div class="content">
+                            <div class="title">1</div>
+                            <p class="content_time">Cơ sở</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-80 mt-3 mx-auto dichvuytenoibat" class="">
+        <div class="dichvu">
+            <div class="img">
+                <img src="images/logo_dichvu.png" alt="">
+            </div>
+            <h3 class="widget_title">QUI TRÌNH KHÁM BỆNH TẠI PHÒNG KHÁM</h3>
+        </div>
+        <div class="textwidget">Của Chúng Tôi</div>
+        <div class="outstandingg">
+            <img src="images/quy-trinh-kham-benh.png" alt="">
+        </div>
+    </div>
+</div>
+<style>
+    #app .header_container .header_time_work {
+        overflow: visible !important;
+    }
+
+    .medilife-contact-info {
+        padding: 30px;
+        background-color: #006cff;
+    }
+
+    .medilife-contact-info {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding-bottom: 0;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 55px;
+        background-color: #f5f7f9;
+        padding: 15px;
+        border: none;
+        font-size: 12px;
+        font-style: italic;
+        margin-bottom: 0 !important;
+    }
+
+    .medilife-book-an-appoinment-area {
+        position: relative;
+        z-index: 1;
+        margin-top: -65px;
+    }
+
+    .medilife-book-an-appoinment-area .appointment-form-content {
+        background-color: #081f3e;
+    }
+
+    .medilife-book-an-appoinment-area .medilife-appointment-form {
+        background-color: #081f3e;
+        padding: 60px 50px;
+    }
+
+    .medilife-book-an-appoinment-area .medilife-appointment-form select {
+        border: 2px solid #536174;
+        background-color: transparent;
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .medilife-book-an-appoinment-area .medilife-appointment-form {
+            padding: 40px 30px;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .medilife-book-an-appoinment-area .medilife-appointment-form {
+            padding: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .medilife-book-an-appoinment-area .medilife-appointment-form button[type=submit] {
+            margin-top: 15px;
+        }
+    }
+
+    .medilife-book-an-appoinment-area .medilife-contact-info {
+        padding: 30px;
+        background-color: #006cff;
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .medilife-book-an-appoinment-area .medilife-contact-info {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding-bottom: 0;
+        }
+    }
+
+    .single-contact-info img {
+        margin-bottom: 15px;
+    }
+
+    .single-contact-info p {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+    .cas_none{
+        display: inline-block !important;
+    }
+    .cas_none_block {
+        display: inline-block !important;
+    }
+
+    #app_content {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    #footer {
+        display: block !important;
+    }
+
+    .redirect {
+        display: none !important;
+    }
+
+    .outstandingg {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .outstandingg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<script>
+    const handle = document.querySelector('.header_container')
+    handle.classList.remove('active')
+</script>

@@ -1,0 +1,311 @@
+<div class="subclinical_container">
+    <div class="subclinical_header">
+        <h1>Khám bệnh</h1>
+        <div>
+            <p class="place">Khu Vực: <span>Chỉ đinh cân lâm sàng</span></p>
+            <div class="place">Bác sĩ Trực: <span>{{docName}}</span></div>
+        </div>
+        <div class="sub_container">
+
+            <div class="sub_body h-100">
+                <div class="sub_left">
+                    <h3>Thông tin bệnh nhân</h3>
+                    {{#each patient}}
+                    <div class="sub_left_content">
+                        <div class="sub_info">
+                            <div class="sub_detail">
+                                <div class="col_1">
+                                    <label for="namepatient" class="col-form-label">Tên bệnh nhân: </label>
+                                </div>
+
+                                <div class="col_2">
+                                    <label for="namepatient" class="col-form-label">{{this.pat_name}}</label>
+                                </div>
+                            </div>
+                            <div class="sub_detail mt-2">
+                                <div class="col_1">
+                                    <label for="namepatient" class="col-form-label">Địa chỉ: </label>
+                                </div>
+                                <div class="col_2">
+                                    <label for="namepatient" class="col-form-label">{{this.pat_address}}</label>
+                                </div>
+                            </div>
+                            <div class="sub_detail mt-2">
+                                <div class="col_1">
+                                    <label for="namepatient" class="col-form-label">Giới tính: </label>
+                                </div>
+                                <div class="col_2">
+                                    <label for="namepatient" class="col-form-label">Nam</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub_info">
+                            <div class="sub_detail">
+                                <div class="col_1">
+                                    <label for="namepatient" class="col-form-label">Ngày sinh: </label>
+                                </div>
+                                <div class="col_2">
+                                    <label for="namepatient" class="col-form-label">{{this.date}}</label>
+                                </div>
+                            </div>
+
+                            <div class="sub_detail mt-2">
+                                <div class="col_1">
+                                    <label for="namepatient" class="col-form-label">Tiền cận: </label>
+                                </div>
+                                <div class="col_2">
+                                    <label for="namepatient" class="col-form-label">Có</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="sub_right">
+                    <h3>Chỉ định</h3>
+                    <div class="sub_right_content">
+                        <div class="row mt-2">
+                            <div class="col-5">
+                                <label for="sex_patient" class="col-form-label">Chọn dịch vụ: </label>
+                            </div>
+                            <div class="col-7">
+                                <div class="form-outline form-white">
+                                    <select style="cursor: pointer;" value="" name="sex" class="subclinical_swapper">
+                                        <option class="subclinical_item"></option>
+                                        {{#each subclinical}}
+                                        <option class="subclinical_item" name={{this.sub_id}} value='{{this.sub_name}}'>
+                                            {{this.sub_name}}
+                                        </option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-5">
+                                <label for="sex_patient" class="col-form-label">Số lượng kết quả chi tiết: </label>
+                            </div>
+                            <div class="col-7">
+                                <div class="form-outline form-white">
+                                    <select name="sex" class="browser-default custom-select">
+                                        <option value="1">...</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+            <form class="sub_footer h-100" style="display:none">
+                <div class="sub_footer_detail">
+                    <table class="table">
+                        <thead class="">
+                            <tr>
+                                <th scope="col">Nội dung khám</th>
+                                <th scope="col">Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><input type="text" readonly class="form-control-plaintext" id="service"
+                                        value="Hồng cầu"></th>
+                                <td><input type="text" required class="form-control" id="bt_red_blood_cells"
+                                        name="bt_red_blood_cells" aria-describedby="" placeholder=""></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row"><input type="text" readonly class="form-control-plaintext" id="service"
+                                        value="Bạch cầu"></th>
+                                <td><input type="text" required class="form-control" id="bt_white_blood_cells"
+                                        name="bt_white_blood_cells" aria-describedby="" placeholder=""></td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row"><input required type="text" readonly class="form-control-plaintext"
+                                        id="service" value="Máu"></th>
+                                <td><input type="text" class="form-control" id="bt_blood" name="bt_blood"
+                                        aria-describedby="" placeholder=""></td>
+
+                            </tr>
+                            <tr>
+
+                                <td colspan="2"><input type="submit" class="form-control" aria-describedby=""
+                                        placeholder="" value="Lưu"
+                                        style="width: 30%; background-color:#6986cf; color:#ffff"></td>
+
+                            </tr>
+                            <input type="hidden" name="idPat" id="idPats" value={{#each
+                                patient}}{{this.pat_id}}{{/each}}>
+                            <input type="hidden" name="idSub" id="idSubs" value="">
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </form>
+            <form class="sub_footer_2 h-100" style="display:block">
+                <div class="sub_footer_detail">
+                    <table class="table">
+                        <thead class="">
+                            <tr>
+                                <th scope="col">Nội dung khám</th>
+                                <th scope="col">Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><input type="text" readonly class="form-control-plaintext showSubName"
+                                        id="service" value=""></th>
+                                <td id="show_detail_sub"><input type="text" required class="form-control" id="detail"
+                                        aria-describedby="" placeholder=""></td>
+
+                            </tr>
+                            <tr>
+
+                                <td colspan="2"><input type="submit" class="form-control" id="result"
+                                        aria-describedby="" placeholder="" value="Lưu"
+                                        style="width: 30%; background-color:#6986cf; color:#ffff"></td>
+
+                            </tr>
+                            <input type="hidden" name="idPat" id="idPat" value={{#each
+                                patient}}{{this.pat_id}}{{/each}}>
+                            <input type="hidden" name="idSub" id="idSub" value="">
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const subclinical_item = document.querySelectorAll('.subclinical_item')
+    const subclinical_swapper = document.querySelector('.subclinical_swapper')
+    const sub_footer = document.querySelector('.sub_footer')
+    const showSubName = document.querySelector('.showSubName')
+    const sub_footer_2 = document.querySelector('.sub_footer_2')
+    const idSub = document.getElementById("idSub")
+    const idPats = document.getElementById("idPats")
+    const idSubs = document.getElementById("idSubs")
+
+    subclinical_swapper.onchange = () => {
+        idSub.value = subclinical_swapper.value
+        idSubs.value = subclinical_swapper.value
+        showSubName.value = subclinical_swapper.value
+
+        switch (subclinical_swapper.value) {
+            case 'Xét nghiệm máu':
+                sub_footer_2.style.display = 'none'
+                sub_footer.style.display = 'block'
+                break;
+            default:
+                sub_footer.style.display = 'none'
+                sub_footer_2.style.display = 'block'
+        }
+    }
+
+    const show_detail_sub = document.getElementById('show_detail_sub')
+    const detail_sub2 = document.getElementById("detail")
+    const idPat = document.getElementById("idPat")
+    sub_footer_2.addEventListener("submit", function (e) {
+        e.preventDefault()
+        // Gửi yêu cầu AJAX đến máy chủ
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/subclinical_handle");
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                detail_sub2.remove()
+                sub_footer_2.style.display = 'none'
+                location.reload()
+            }
+        };
+        xhr.send(JSON.stringify({
+            detail: detail_sub2.value,
+            idPat: idPat.value,
+            idSub: idSub.value
+        }));
+    })
+    const bt_red_blood_cells = document.getElementById('bt_red_blood_cells')
+    const bt_white_blood_cells = document.getElementById('bt_white_blood_cells')
+    const bt_blood = document.getElementById('bt_blood')
+    sub_footer.addEventListener("submit", function (e) {
+        e.preventDefault()
+        // Gửi yêu cầu AJAX đến máy chủ
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/subclinical_handle");
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                sub_footer.style.display = 'none'
+            }
+        };
+        xhr.send(JSON.stringify({
+            idPat: idPats.value,
+            idSub: idSubs.value,
+            bt_red_blood_cells: bt_red_blood_cells.value,
+            bt_white_blood_cells: bt_white_blood_cells.value,
+            bt_blood: bt_blood.value
+
+        }));
+    })
+</script>
+<style>
+    .table-striped tbody tr:nth-child(odd) td,
+    .table-striped tbody tr:nth-child(odd) th {
+        background-color: #d9ecff;
+    }
+
+    .gj-datepicker-bootstrap [role=right-icon] button .gj-icon,
+    .gj-datepicker-bootstrap [role=right-icon] button .material-icons {
+        position: absolute;
+        font-size: 21px;
+        top: 15%;
+        left: 20%;
+        color: #335fc4;
+    }
+
+    .arrowHidden {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    #app .header_container #login_hidden {
+        display: none !important;
+    }
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+</style>

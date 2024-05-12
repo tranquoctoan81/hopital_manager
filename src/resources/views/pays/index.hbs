@@ -1,0 +1,111 @@
+<style>
+    #app .header_container {
+        width: 100%;
+    }
+
+    .arrowHidden {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+    }
+
+    #app .header_container #login_hidden {
+        display: none !important;
+    }
+
+    #app .header_container .header_time_work {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden1 {
+        background-color: #335fc4 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container .header_time_work .hotline_search .hotline .hidden2 {
+        background-color: #0c1c44 !important;
+    }
+
+    #app .header_container nav .menu_header .nav-item .nav-link {
+        color: #335fc4;
+    }
+
+    /* Tùy chỉnh CSS */
+    body {
+        background-color: #f0f5f9;
+    }
+
+    .container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #007bff;
+        text-align: center;
+    }
+
+    .form-check-label {
+        font-weight: bold;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: none;
+    }
+
+    /* Tùy chỉnh màu xanh dương */
+    .bg-primary-custom {
+        background-color: #007bff;
+    }
+
+    .btn-primary-custom {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary-custom:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+</style>
+<script>
+    // Xử lý hiển thị các phần trong biểu mẫu dựa trên lựa chọn thanh toán
+    document.addEventListener('DOMContentLoaded', function () {
+        const tienMat = document.getElementById('tienMat');
+        const chuyenKhoan = document.getElementById('chuyenKhoan');
+        const soKhamBenh = document.getElementById('soKhamBenh');
+        const dichVu = document.getElementById('dichVu');
+
+        tienMat.addEventListener('change', function () {
+            soKhamBenh.style.display = 'block';
+            dichVu.style.display = 'block';
+        });
+
+        chuyenKhoan.addEventListener('change', function () {
+            soKhamBenh.style.display = 'none';
+            dichVu.style.display = 'block';
+        });
+    });
+</script>

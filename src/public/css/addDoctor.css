@@ -1,0 +1,29 @@
+.body-info {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+  .body-info .form-info {
+    width: 500px;
+    border-color: black;
+    border: solid 1px;
+    color: black;
+    padding: 15px;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 10px; }
+    .body-info .form-info .form-info input {
+      color: black; }
+  .body-info .form-control {
+    display: block;
+    width: 100%;
+    outline: none;
+    border-top: 1px solid transparent;
+    background-color: transparent;
+    border-right: transparent;
+    border-left: transparent;
+    border-bottom: 1px solid black; }

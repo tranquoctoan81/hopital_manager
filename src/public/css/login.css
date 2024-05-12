@@ -1,0 +1,19 @@
+.body-login {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("https://st.quantrimang.com/photos/image/2021/02/03/Hinh-nen-xanh-la-cay-31.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+  .body-login .form-login {
+    width: 500px;
+    border-color: black;
+    border: solid 1px;
+    color: white;
+    padding: 15px;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 10px; }
